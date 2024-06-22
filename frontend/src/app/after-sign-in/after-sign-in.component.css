@@ -1,0 +1,110 @@
+.header-container {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+  }
+  
+  .header-content {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  .gallery-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+  }
+  
+  .gallery-container img {
+    width: calc(20% - 10px);
+    border-radius: 8px;
+  }
+  
+  @media (max-width: 768px) {
+    .gallery-container img {
+      width: calc(50% - 10px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .gallery-container img {
+      width: calc(100% - 10px);
+    }
+  }
+  .header-container {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  
+  .header-background {
+    background-image: url('../../assets/images/image1.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Adjust based on your design needs */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .header-content {
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with transparency */
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    margin: 10px 0;
+    font-size: 2.5rem;
+  }
+  
+  p {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+      

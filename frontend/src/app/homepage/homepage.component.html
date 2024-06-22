@@ -1,0 +1,27 @@
+<div class="container my-5">
+    <header class="text-center mb-4">
+      <h1>Find your in home with RentNest🏘️</h1>
+      <p>Access house price estimates, save properties and searches and get instant alerts for new listings</p>
+      <div class="d-flex justify-content-center my-3">
+        <div class="badge bg-light text-dark mx-2">Best Properties in Mumbai</div>
+        <div class="badge bg-light text-dark mx-2">Best PG in Mumbai</div>
+      </div>
+    </header>
+  
+    <div class="search-section bg-light p-4 rounded mb-4">
+      <div class="d-flex justify-content-center">
+        <div class="btn-group mx-2" role="group" aria-label="For Sale or Rent"  style="color: #1743e3;">
+          <input type="radio" class="btn-check" name="options" id="forSale" autocomplete="off" checked>
+          <label class="btn btn-outline-primary" for="forSale" (click)="onSale()" style="background-color: #1743e3;">TO SALE</label>
+         
+          <input type="radio" class="btn-check" name="options" id="toRent" autocomplete="off">
+          <label class="btn btn-outline-primary"   for="toRent"><a class="nav-link" routerLink="/rent-home">TO RENT </a></label>
+        </div>
+      </div>
+      <div class="input-group mt-3">
+        <input type="text" class="form-control" placeholder="e.g. Mumbai or Delhi">
+        <button class="btn btn-warning"  type="button">SEARCH</button>
+      </div>
+    </div>
+  </div>
+

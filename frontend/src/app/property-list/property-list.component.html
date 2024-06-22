@@ -1,0 +1,41 @@
+<div class="property-list" *ngIf="homes.length > 0">
+<ul><li *ngFor="let home of homes">
+  <div class="property-card">
+    <h3 style="padding: 10px; font-weight: bold;">{{home.sellerName}}<br/>
+      <span>{{home.towerName}}</span>
+    </h3>
+   
+    <img src="assets/image/img1.jpg" alt="Property Image" class="property-image">
+    <div class="property-info">
+      <div class="property-price">
+        <span>Rs. {{home.price}}</span>
+        <button class="favorite-btn">
+          <i class="fa fa-heart-o" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="property-details">
+        <span style="font-weight: bold;">{{home.category}}</span>
+        <div class="grid-container">
+          <div class="grid-item"><i class="fas fa-building"></i>{{home.towerName}}</div>
+          <div class="grid-item"><i class="fa fa-address-card" aria-hidden="true"></i>{{home.address}}</div>
+          <div class="grid-item"><i class="fas fa-landmark"></i>{{home.landMark}}</div>
+          <div class="grid-item"><i class="fas fa-map-pin"></i>{{home.location}}</div>
+          <div class="grid-item"><i class="fas fa-ruler"></i>{{home.area}}</div>
+          <div class="grid-item"><i class="fas fa-bed"></i>{{home.bhk}}</div>
+          <div class="grid-item"><i class="fas fa-couch"></i>{{home.furnished}}Furnished</div>
+          <div class="grid-item"><i class="fas fa-building"></i>{{home.floorNo}} of {{home.totalFloors}}</div>
+          <div class="grid-item"><i class="fas fa-car"></i>Parking. {{home.parking}}</div> 
+          <div class="grid-item"><i class="fas fa-phone"></i>{{home.phoneNo}}</div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</li></ul>
+
+</div>
+
+<div *ngIf="homes.length === 0">
+  <p>No homes available.</p>
+</div>
+
