@@ -9,6 +9,9 @@ import { NavigationEnd, Router } from '@angular/router';
 export class HomepageComponent {
   constructor(private router:Router){}
   onSale(){
-    this.router.navigate(['sales-app'])
+    this.router.navigate(['sales-form-app'])
+  }
+  onRent(){
+    this.router.navigate(['property-list'])
   }
 }

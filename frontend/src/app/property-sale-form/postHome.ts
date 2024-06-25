@@ -8,7 +8,7 @@ interface postHome{
     bhk: string;
     furnished: string;
     ownerType: string;
-    location: string;
+    city: string;
     floorNo: number;
     totalFloors: number;
     parking:string;

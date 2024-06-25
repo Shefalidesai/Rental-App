@@ -7,86 +7,20 @@
     height: auto;
   }
   
-  .home .rhombus2{
+  .rhombus2{
     position: absolute;
-    width: 30%;
-    height: 50%;
-    right: 6%;
-    background: #1743e3;
+    width: 80%;
+    height: 180%;
+    background: #5076ff;
     transform: rotate(45deg);
     z-index: -1;
-    bottom:-30%;
+    right: 50rem;
    
   }
-/* Large screens */
-@media (min-width: 1200px) {
-  .home .rhombus2 {
-    width: 25%;
-    height: 45%;
-    right: 5%;
-    top: 220%;
-  }
+  .form-box {
+    border: 1px solid #ddd;
+    display: flex;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #fff;
 }
-
-/* Medium screens */
-@media (min-width: 768px) and (max-width: 1799px) {
-  .home .rhombus2 {
-    width: 35%;
-    height: 55%;
-    right: 7%;
-    top: 230%;
-  }
-}
-
-/* Small screens */
-@media (max-width: 767px) {
-  .home .rhombus2 {
-    width: 40%;
-    height: 60%;
-    right: 10%;
-    top: 240%;
-  }
-}
-
-/* Extra small screens */
-@media (max-width: 480px) {
-  .home .rhombus2 {
-    width: 50%;
-    height: 70%;
-    right: 12%;
-    top: 250%;
-  }
-}
-  @keyframes slideRight{
-    0%{
-      transform: translateX(-100px);
-      opacity: 0;
-    }
-    100%{
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes car{
-    0%{
-      transform: translate(300px,-300px) scale(0) rotate(-45deg);
-      opacity: 0;
-    }
-    100%{
-      transform: translate(0,0) scale(1) rotate(-45deg);
-  
-      opacity: 1;
-    }
-  }
-
-  @keyframes zoomOut{
-    0%{
-      transform: scale(1.1);
-      opacity: 0;
-    }
-    100%{
-      transform: scale(1);
-      opacity: 1;
-    }
-  }

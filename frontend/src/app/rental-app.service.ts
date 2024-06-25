@@ -10,13 +10,12 @@ export class RentalAppService {
 
   constructor(private http:HttpClient) { }
 
-  private apiUrl='http://localhost:8080/homes';
+  private baseUrl='http://localhost:8080/homes';
   private postApi='http://localhost:8080/homes/createAd';
 
-  
 
-  getHomeSales():Observable<HomeSales[]>{
-    return this.http.get<HomeSales[]>(this.apiUrl);
+  getHomeSales(endpoint: string = ''):Observable<HomeSales[]>{
+    return this.http.get<HomeSales[]>(`${this.baseUrl}${endpoint}`);
   }
 
   postHomeSale(postHome:postHome):Observable<any>{
@@ -31,7 +30,7 @@ export class RentalAppService {
     formData.append('bhk', postHome.bhk);
     formData.append('furnished', postHome.furnished);
     formData.append('ownerType', postHome.ownerType);
-    formData.append('address', postHome.location);
+    formData.append('address', postHome.city);
     formData.append('address', postHome.floorNo.toString());
     formData.append('address', postHome.totalFloors.toString());
     formData.append('address', postHome.parking);

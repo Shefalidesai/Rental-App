@@ -15,7 +15,6 @@ import { AxiosService } from './axios.service';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PropertySaleFormComponent } from './property-sale-form/property-sale-form.component';
 import { PropertyListComponent } from './property-list/property-list.component';
-import { NewHomesComponent } from './new-homes/new-homes.component';
 import { AfterSignInComponent } from './after-sign-in/after-sign-in.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -31,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RentalAppService } from './rental-app.service';
 import { SectionanimationComponent } from './sectionanimation/sectionanimation.component';
 import { SellPropertyListComponent } from './sell-property-list/sell-property-list.component';
+import { NewConstructionComponent } from './new-construction/new-construction.component';
 
 @NgModule({
   declarations: [
@@ -44,12 +44,12 @@ import { SellPropertyListComponent } from './sell-property-list/sell-property-li
     HomepageComponent,
     PropertySaleFormComponent,
     PropertyListComponent,
-    NewHomesComponent,
     AfterSignInComponent,
     DashboardComponent,
     SilderComponent,
     SectionanimationComponent,
-    SellPropertyListComponent
+    SellPropertyListComponent,
+    NewConstructionComponent
   ],
   imports: [
     ReactiveFormsModule,

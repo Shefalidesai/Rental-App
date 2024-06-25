@@ -17,4 +17,26 @@
     height: 40px;
   }
 
-  
+  .box-container {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-pills .nav-link {
+    margin-bottom: 10px;
+}
+
+.form-outline {
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+.tab-content {
+    padding-top: 20px;
+}

@@ -31,6 +31,14 @@ public class HomeSaleService {
             }
         }
 
+        public List<HomeSale> getByConstruction(String construction){
+            return homeSaleRepo.findByConstruction(construction);
+        }
+
+        public List<HomeSale> getByCategory(String category){
+            return homeSaleRepo.findByCategory(category);
+        }
+
         public HomeSale saveSale(HomeSale homeSale){
             return homeSaleRepo.save(homeSale);
         }

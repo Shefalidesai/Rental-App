@@ -5,9 +5,9 @@
         <div class="logo-name">RentNest</div>
     </div>
       <nav>
-        <button mat-button style="color: rgb(102, 101, 101);" >For sale</button>
+        <button mat-button style="color: rgb(102, 101, 101);"(click)="onForSale()">For sale</button>
         <button mat-button style="color: rgb(102, 101, 101);" (click)="onRent()">To rent</button>
-        <button mat-button style="color: rgb(102, 101, 101);"  >New Constructions</button>
+        <button mat-button style="color: rgb(102, 101, 101);" (click)="newProperties()" >New Constructions</button>
         <button mat-button style="color: rgb(102, 101, 101);" (click)="onSale()">Post Sell Ad</button>
       </nav>
       <button mat-raised-button color="primary" class="sign-in" style="background-color:#1743e3;" (click)="OnLogin()">Sign In</button>

@@ -10,12 +10,18 @@ export class DashboardComponent  {
   constructor(private router:Router){}
   
   onSale(){
-    this.router.navigate(['sales-app'])
+    this.router.navigate(['sales-form-app'])
   }
   onRent(){
-    this.router.navigate(['property-list']);
+    this.router.navigate(['rent-property-list']);
   }
   OnLogin(){
     this.router.navigate(['login'])
+  }
+  newProperties(){
+    this.router.navigate(['new-property'])
+  }
+  onForSale(){
+    this.router.navigate(['sale-property-list']);
   }
 }

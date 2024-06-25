@@ -6,10 +6,10 @@ interface HomeSales {
   address: string;
   landMark:string;
   area: string;
-  bhk: string;
+  bhk: number;
   furnished: string;
   ownerType: string;
-  location: string;
+  city: string;
   floorNo: number;
   totalFloors: number;
   parking:string;

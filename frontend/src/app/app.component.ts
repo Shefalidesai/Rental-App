@@ -15,7 +15,7 @@ export class AppComponent {
 
   //  router.events.subscribe((val)=>{
   //   if(val instanceof NavigationEnd){
-  //     if( val.url=='/sales-app'){
+  //     if( val.url=='/sales-form-app'){
   //       this.showSale=true;
   //       this.showDashboard=false;
   //     }else{

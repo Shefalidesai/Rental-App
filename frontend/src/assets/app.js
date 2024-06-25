@@ -3,10 +3,7 @@
     let next = document.getElementById('next');
     let prev = document.getElementById('prev');
     let thumbnails = document.querySelectorAll('.thumbnail .item');
-    function toggleForm(){
-        const container = document.querySelector('.container');
-        container.classList.toggle('active');
-      };
+    
 
     // config param
     let countItem = itemSilder.length;

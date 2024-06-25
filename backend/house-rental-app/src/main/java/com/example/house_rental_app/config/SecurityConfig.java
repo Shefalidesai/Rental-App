@@ -27,6 +27,7 @@ public class SecurityConfig extends WebConfig {
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.GET,"/homes/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/homes/{construction}").permitAll()
                         .requestMatchers(HttpMethod.POST,"/homes/createAd").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login","/register").permitAll()
                         .anyRequest().authenticated())

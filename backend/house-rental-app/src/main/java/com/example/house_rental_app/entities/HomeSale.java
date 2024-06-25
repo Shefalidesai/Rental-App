@@ -44,8 +44,9 @@ public class HomeSale {
     @Column(name = "ownerType", nullable = false)
     private String ownerType;
 
-    @Column(name = "location" ,nullable = false)
-    private String location;
+    @Column(name = "city" ,nullable = false)
+    private String city;
+
 
     @Column(name = "floorNo", nullable = false)
     private Long floorNo;
@@ -61,6 +62,9 @@ public class HomeSale {
 
     @Column(name = "category", nullable = false)
     private String category;
+
+    @Column(name = "construction", nullable = false)
+    private String construction;
 
     @OneToMany(mappedBy = "homeSale", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Image> images;

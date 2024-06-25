@@ -5,6 +5,7 @@
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s;
   cursor: pointer;
+  margin: 2rem;
 }
 
 .property-card:hover {
@@ -74,4 +75,83 @@
 }
 .grid-item i{
   padding: 5px;
+}
+
+
+.center-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 30vh;
+  background-color: #5f2dc4;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 20px;
+  margin: 0 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-button.active,
+.nav-button:hover {
+  background-color: white;
+  color: #5f2dc4;
+}
+
+.search-bar {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 30px;
+}
+
+.city-dropdown {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.tag {
+  background-color: #6f39d4;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+
+.add-tag {
+  color: #00d4ff;
+  cursor: pointer;
+}
+
+.search-button {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
 }
