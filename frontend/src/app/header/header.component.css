@@ -1,85 +1,30 @@
-.app-logo {
-  height: 30%;
+.container {
+  font-family: Arial, sans-serif;
 }
 
-.app-header {
-  background-color: #acacac;
-  height: 1%;
-  padding: 1%;
-  color: white;
-  text-align: center;
-}
-
-.app-title {
-  font-size: 1.5em;
-}
-/* src/app/header/header.component.css */
 header {
-  background-color: white;
-  border-bottom: 1px solid #eaeaea;
-}
-
-.header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #fff;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3), -10px -10px 15px rgba(0, 0, 0, 0.3);
 }
 
-.logo img {
-  height: 40px;
-}
-
-nav ul {
-  list-style: none;
+.logo-container {
   display: flex;
-  gap: 20px;
+  align-items: center;
 }
-
-nav ul li a {
-  text-decoration: none;
-  color: black;
+.logo {
+  width: 10%; /* Adjust the width as needed */
+  height: auto;
+  margin-right: 2%; /* Space between the logo and the text */
+}
+.logo-name {
+  font-size: 14px; /* Adjust the font size as needed */
   font-weight: bold;
 }
-
-.sign-in button {
-  background-color: orange;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
-}
-
-.search-container {
-  text-align: center;
-  padding: 50px 20px;
-  background-image: url('../../assets/images/image1.jpg');
-  background-size: cover;
-  color: white;
-}
-
-.search-box {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.search-box input {
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  width: 300px;
-  border-radius: 5px 0 0 5px;
-}
-
-.search-box button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  background-color: orange;
-  color: white;
-  cursor: pointer;
-  border-radius: 0 5px 5px 0;
+nav button {
+  margin: 0 10px;
 }

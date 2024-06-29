@@ -41,52 +41,15 @@
   .home .rhombus2{
     margin-top: 3rem;
     position: absolute;
-    width: 10%;
-    height: 10%;
+    width: 30%;
+    height: 50%;
     background: #1743e3;
     transform: rotate(45deg);
     z-index: -1;
-    top: 223%;
-  }
-  /* Large screens */
-  @media (min-width: 1200px) {
-  .home .rhombus2 {
-    width: 25%;
-    height: 45%;
-    right: 5%;
+    left: 60%;
     top: 220%;
   }
-  }
-  
-  /* Medium screens */
-  @media (min-width: 768px) and (max-width: 1799px) {
-  .home .rhombus2 {
-    width: 35%;
-    height: 55%;
-    right: 7%;
-    top: 230%;
-  }
-  }
-  
-  /* Small screens */
-  @media (max-width: 767px) {
-  .home .rhombus2 {
-    width: 40%;
-    height: 60%;
-    right: 10%;
-    top: 240%;
-  }
-  }
-  
-  /* Extra small screens */
-  @media (max-width: 480px) {
-  .home .rhombus2 {
-    width: 50%;
-    height: 70%;
-    right: 12%;
-    top: 250%;
-  }
-  }
+ 
   @keyframes slideRight{
     0%{
       transform: translateX(-100px);
@@ -168,3 +131,5 @@
     --primary-color: #c8dc71;
     --gradient-color: linear-gradient(180deg, #d2ff00 0%, #00d2ff 100%);
   }  
+
+  

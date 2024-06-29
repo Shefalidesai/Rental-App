@@ -1,11 +1,23 @@
+<header *ngIf="showLogin">
+  <img src="assets/images/home.jpg" alt="Zoopla Logo" class="logo">
+  <nav>
+    <button mat-button style="color: rgb(102, 101, 101)" (click)="onBack()">Back</button>
+  </nav>
+</header>
 <div>
-  <app-buttons
+  <!-- <app-buttons
     (loginEvent)="showComponent('login')"
     (logoutEvent)="showComponent('welcome')"
-  />
+  /> -->
 
-	<app-welcome-content *ngIf="componentToShow == 'welcome'"/>
-	<app-login-form *ngIf="componentToShow == 'login'" (onSubmitLoginEvent)="onLogin($event)" (onSubmitRegisterEvent)="onRegister($event)"/>
-	<app-auth-content *ngIf="componentToShow == 'messages'"/>
-
+  <!-- parent -->
+	<!-- <app-welcome-content *ngIf="componentToShow == 'welcome'"/> -->
+	<app-login-form *ngIf="showLogin"  (onSubmitLoginEvent)="onLogin($event)" (onSubmitRegisterEvent)="onRegister($event)" (onSuccessfulLogin)="getUserName($event)"/>
+  <div *ngIf="showName">
+    <p>User Data:</p>
+    <pre>{{ user | json }}</pre>
+  </div>
+  <app-auth-content *ngIf="componentToShow == 'messages'" />
+  <app-message-box  [showMessage]="showMessage" [message]="message"></app-message-box>
+ 
 </div>

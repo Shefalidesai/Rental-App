@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, ViewChild } from '@angular/core';
 import { AxiosService } from '../axios.service';
+import { RentalAppService } from '../rental-app.service';
 
 @Component({
   selector: 'app-auth-content',
@@ -7,27 +8,14 @@ import { AxiosService } from '../axios.service';
   styleUrls: ['./auth-content.component.css']
 })
 export class AuthContentComponent {
+
+  
+ 
   data: string[] = [];
 
-  constructor(private axiosService: AxiosService) {}
+  constructor(private axiosService: AxiosService, private service: RentalAppService) {}
 
   ngOnInit(): void {
-    this.axiosService.request(
-        "GET",
-        "/user",
-        {}).then(
-        (response) => {
-            this.data = response.data;
-        }).catch(
-        (error) => {
-            if (error.response.status === 401) {
-                this.axiosService.setAuthToken(null);
-            } else {
-                this.data = error.response.code;
-            }
-
-        }
-    );
   }
 
-}
+  }

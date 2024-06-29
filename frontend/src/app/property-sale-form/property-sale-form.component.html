@@ -24,12 +24,16 @@
           <input type="text" class="form-control" id="address" formControlName="address" name="address">
         </div>
         <div class="mb-3">
-          <label for="landMark" class="form-label">landMark</label>
-          <input type="text" class="form-control" id="address" formControlName="landMark" name="address">
+          <label for="area" class="form-label">Carpet Area</label>
+          <input type="text" class="form-control" id="area" formControlName="carpetArea" name="area" placeholder="sqft">
         </div>
         <div class="mb-3">
-          <label for="area" class="form-label">Area</label>
-          <input type="text" class="form-control" id="area" formControlName="area" name="area">
+          <label for="city" class="form-label">City</label>
+          <input type="text" class="form-control" id="city" formControlName="city" name="city">
+        </div>
+        <div class="mb-3">
+          <label for="town" class="form-label">Town</label>
+          <input type="text" class="form-control" id="town" formControlName="town" name="town">
         </div>
         <div class="mb-3">
           <label for="bhk" class="form-label">BHK</label>
@@ -38,8 +42,9 @@
         <div class="mb-3">
           <label for="furnished" class="form-label">Furnished</label>
           <select class="form-select" id="furnished" formControlName="furnished" name="furnished">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
+            <option value="SemiFurnished">Semi Furnished</option>
+            <option value="UnFurnished">UnFurnished</option>
+            <option value="Fully Furnished">Fully Furnished</option>
           </select>
         </div>
         <div class="mb-3">
@@ -54,8 +59,8 @@
           <label for="purpose" class="form-label">Purpose</label>
           <select class="form-select" id="purpose" formControlName="category" name="purpose">
             <option value="Sell">Sell</option>
-            <option value="Rent/lease">Rent/lease</option>
-            <option value="List as PG">List as PG</option>
+            <option value="Rent">Rent</option>
+            <option value="PG">List as PG</option>
           </select>
         </div>
         <div class="mb-3">
@@ -68,8 +73,18 @@
         </div>
         <div class="mb-3">
           <label for="parking" class="form-label">Parking</label>
-          <input type="text" class="form-control" id="address" formControlName="parking" name="address">
-        </div>
+          <select class="form-select" id="ownerType" formControlName="parking" name="parking">
+            <option value="Available">Available</option>
+            <option value="Not Available">Not Available</option>
+          </select>
+          </div>
+          <div class="mb-3">
+            <label for="construction" class="form-label">Construction</label>
+            <select class="form-select" id="construction" formControlName="construction" name="construction">
+              <option value="Old">Old</option>
+              <option value="New">New</option>
+            </select>
+          </div>
         <div class="mb-3">
           <label for="contactNumber" class="form-label">Your contact number</label>
           <div class="input-group">
@@ -77,15 +92,16 @@
             <input type="text" class="form-control" id="contactNumber" formControlName="phoneNo" name="contactNumber">
           </div>
         </div>
-        <div class="mb-3">
+        <!-- <div class="mb-3">
         
             <label for="images">Select Images</label>
             <input type="file" id="images" (change)="onFileChange($event)" multiple class="form-control">
           
           <button type="submit" class="btn btn-primary">Upload</button>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        </div> -->
+        <button type="submit"  class="btn btn-primary">Submit</button>
       </form>
+      <app-message-box [showMessage]="showMessage" [message]="message"></app-message-box>
       <div class="col-md-6" style="align-content: center;">
         <img src="assets/images/Ad.png" alt="Property Ad" class="img-fluid">
       </div>

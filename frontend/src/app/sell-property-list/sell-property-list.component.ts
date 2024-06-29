@@ -11,7 +11,7 @@ export class SellPropertyListComponent  implements OnInit {
 
 
   selectedButton: string = 'Buy';
-  bhk!:string;
+  bhk!:number;
   furnishing!: string;
   parking!: string;
   city!: string;

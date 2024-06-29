@@ -5,7 +5,7 @@ interface HomeSales {
   price: number;
   address: string;
   landMark:string;
-  area: string;
+  carpetArea: number;
   bhk: number;
   furnished: string;
   ownerType: string;
@@ -15,6 +15,7 @@ interface HomeSales {
   parking:string;
   phoneNo:number;
   category:string;
+  construction:string;
 }
 
  

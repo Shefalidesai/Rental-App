@@ -1,0 +1,12 @@
+.message-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    text-align: center;
+    z-index: 1000;
+  }
+  

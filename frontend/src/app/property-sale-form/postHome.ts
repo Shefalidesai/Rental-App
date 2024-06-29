@@ -1,11 +1,12 @@
 interface postHome{
     sellerName: string;
     towerName: string;
+    landMark:string;
     price: number;
     address: string;
-    landMark:string;
-    area: string;
-    bhk: string;
+    carpetArea: number;
+    bhk: number;
+    town:string;
     furnished: string;
     ownerType: string;
     city: string;
@@ -14,5 +15,6 @@ interface postHome{
     parking:string;
     phoneNo:number;
     category:string;
+    construction:string;
     images: File[];
 }

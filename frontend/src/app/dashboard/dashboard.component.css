@@ -1,34 +1,4 @@
-.container {
-    font-family: Arial, sans-serif;
-  }
-  
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    margin: 1rem;
-    background-color: #fff;
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3), -10px -10px 15px rgba(0, 0, 0, 0.3);
-  }
-  
-  .logo-container {
-    display: flex;
-    align-items: center;
-}
-.logo {
-    width: 10%; /* Adjust the width as needed */
-    height: auto;
-    margin-right: 2%; /* Space between the logo and the text */
-}
-.logo-name {
-    font-size: 14px; /* Adjust the font size as needed */
-    font-weight: bold;
-}
-  nav button {
-    margin: 0 10px;
-  }
-  
+
   .sign-in {
     background-color: #ff6600;
     color: #fff;

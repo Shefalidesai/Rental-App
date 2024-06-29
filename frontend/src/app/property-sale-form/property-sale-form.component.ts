@@ -11,15 +11,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PropertySaleFormComponent implements OnInit  {
   saleForm!: FormGroup;
-
+  showMessage: boolean = false;
+  message: string = '';
   postHomeSale: postHome={
     sellerName: ' ',
     towerName: ' ',
     price: 0,
     address: ' ',
     landMark:' ',
-    area: ' ',
-    bhk: ' ',
+    carpetArea: 0,
+    bhk: 0,
+    town:' ',
     furnished: ' ',
     ownerType: ' ',
     city: ' ',
@@ -28,6 +30,7 @@ export class PropertySaleFormComponent implements OnInit  {
     parking:' ',
     phoneNo:0,
     category:' ',
+    construction:'',
     images: [],
   }
 
@@ -40,8 +43,9 @@ export class PropertySaleFormComponent implements OnInit  {
       price: [0, Validators.required],
       address: ['', Validators.required],
       landMark: [''],
-      area: [''],
-      bhk: [''],
+      carpetArea: 0,
+      town:[''],
+      bhk: 0,
       furnished: [''],
       ownerType: [''],
       city: [''],
@@ -50,6 +54,7 @@ export class PropertySaleFormComponent implements OnInit  {
       parking: [''],
       phoneNo: [0, Validators.required],
       category: [''],
+      construction:['']
       
     }); 
   }
@@ -77,6 +82,15 @@ export class PropertySaleFormComponent implements OnInit  {
         this.http.post('http://localhost:8080/homes/createAd', this.saleForm.value)
           .subscribe(response => {
             console.log('Form submitted successfully!', response);
+            this.message = 'Form submitted successfully!';
+            this.showMessage = true;
+            
+
+    setTimeout(() => {
+      this.showMessage = false;
+      window.location.reload();
+    }, 3000); // Hide the message after 3 seconds
+
           }, error => {
             console.error('Error submitting form', error);
           });

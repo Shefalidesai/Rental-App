@@ -2,16 +2,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import  './property-sale-form/postHome';
+import { AxiosService } from './axios.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RentalAppService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private axiosService: AxiosService) { }
 
   private baseUrl='http://localhost:8080/homes';
   private postApi='http://localhost:8080/homes/createAd';
+  data!: string;
 
 
   getHomeSales(endpoint: string = ''):Observable<HomeSales[]>{
@@ -26,8 +28,8 @@ export class RentalAppService {
     formData.append('price', postHome.price.toString());
     formData.append('address', postHome.address);
     formData.append('address', postHome.landMark);
-    formData.append('area', postHome.area);
-    formData.append('bhk', postHome.bhk);
+    formData.append('carpetArea', postHome.carpetArea.toString());
+    formData.append('bhk', postHome.bhk.toString());
     formData.append('furnished', postHome.furnished);
     formData.append('ownerType', postHome.ownerType);
     formData.append('address', postHome.city);
@@ -36,7 +38,7 @@ export class RentalAppService {
     formData.append('address', postHome.parking);
     formData.append('contactNumber', postHome.phoneNo.toString());
     formData.append('purpose', postHome.category);
-    
+    formData.append('town',postHome.town);
     
     // for (let i = 0; i < postHome.images.length; i++) {
     //   formData.append('images', postHome.images[i], postHome.images[i].name);
@@ -51,4 +53,7 @@ export class RentalAppService {
 
   }
 
+  getNames(firstName:string): Observable<any> {
+    return this.http.get(`/firstName/${firstName}`);
+  }
 }

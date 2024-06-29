@@ -12,48 +12,55 @@ import { HttpClient } from '@angular/common/http';
 export class PropertyListComponent  implements OnInit {
 
   selectedButton: string = 'Buy';
-  bhk: number = 1;
+  selectedBhk: number = 1;
   furnishing: string = '';
   parking: string = 'yes';
   city: string = 'Mumbai';
   homes:HomeSales[] = [];
-  filteredHomes: any[] = [];
-  filtered:any[]=[];
+
 
   constructor(private service:RentalAppService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.getHomeSale();
-    this.applyFilters();
-   
    }
-   selectButton(button: string) {
-    this.selectedButton = button;
-  }
 
-getHomeSale():void{
+  getHomeSale():void{
     this.service.getHomeSales('/category/Rent').subscribe((data:HomeSales[])=>{
       this.homes=data;
       console.log(data);
-      this.applyFilters();
-    })
+     
+    })} 
+
+    onBhkChange(){
+      this.service.getHomeSales('/bhk'+'/'+this.selectedBhk).subscribe((data:HomeSales[])=>{
+        this.homes=data;
+        console.log(this.selectedBhk+'bhk'+data);
+      })
+    }
+
+    onFurnishingChange(){
+      this.service.getHomeSales('/furnished'+'/'+this.furnishing).subscribe((data:HomeSales[])=>{
+        this.homes=data;
+        console.log(this.furnishing+'furnished'+data);
+      })
+    }
+
+    onParkingChange(){
+      this.service.getHomeSales('/furnished'+'/'+this.furnishing).subscribe((data:HomeSales[])=>{
+        this.homes=data;
+        console.log(this.furnishing+'furnished'+data);
+      })
+    }
+
+    onCityChange(){
+      this.service.getHomeSales('/city'+'/'+this.city).subscribe((data:HomeSales[])=>{
+        this.homes=data;
+        console.log(this.city+'city'+data);
+      })
+    }
 }
   
-applyFilters(): void {
-  this.filteredHomes = this.homes.filter(home =>
-    (this.bhk === 0 || home.bhk === this.bhk) &&
-    (this.furnishing === '' || home.furnished === this.furnishing) &&
-    (this.parking === '' || home.parking === this.parking) &&
-    (this.city === '' || home.city === this.city)
-  );
-  console.log(this.bhk);
-  
-  console.log('Filtered Homes:', this.filteredHomes);
-}
 
-onFilterChange(): void {
-  this.applyFilters();
-}
- 
 
-}
+
