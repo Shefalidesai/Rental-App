@@ -9,13 +9,10 @@ import { RentalAppService } from '../rental-app.service';
 })
 export class AuthContentComponent {
 
-  
- 
-  data: string[] = [];
-
   constructor(private axiosService: AxiosService, private service: RentalAppService) {}
 
   ngOnInit(): void {
   }
 
+ 
   }

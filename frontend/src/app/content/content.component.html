@@ -5,19 +5,15 @@
   </nav>
 </header>
 <div>
-  <!-- <app-buttons
-    (loginEvent)="showComponent('login')"
-    (logoutEvent)="showComponent('welcome')"
-  /> -->
-
-  <!-- parent -->
-	<!-- <app-welcome-content *ngIf="componentToShow == 'welcome'"/> -->
-	<app-login-form *ngIf="showLogin"  (onSubmitLoginEvent)="onLogin($event)" (onSubmitRegisterEvent)="onRegister($event)" (onSuccessfulLogin)="getUserName($event)"/>
-  <div *ngIf="showName">
-    <p>User Data:</p>
-    <pre>{{ user | json }}</pre>
-  </div>
+	<app-login-form *ngIf="showLogin"  (onSubmitLoginEvent)="onLogin($event)" (onSubmitRegisterEvent)="onRegister($event)" />
   <app-auth-content *ngIf="componentToShow == 'messages'" />
   <app-message-box  [showMessage]="showMessage" [message]="message"></app-message-box>
- 
+  <div *ngIf="showName">
+    <p>User Data:</p>
+    <pre>{{ user }}</pre>
+  </div>
+  <div *ngIf="showAfterLogin">
+    <p>User Data:</p>
+    <pre>{{ userAfterLogin }}</pre>
+  </div>
 </div>

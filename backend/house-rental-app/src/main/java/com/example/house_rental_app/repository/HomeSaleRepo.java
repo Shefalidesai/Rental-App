@@ -10,4 +10,8 @@ import java.util.List;
 public interface HomeSaleRepo extends JpaRepository<HomeSale, Long> {
     List<HomeSale> findByConstruction(String construction);
     List<HomeSale> findByCategory(String category);
+    List<HomeSale> findByCity(String city);
+    List<HomeSale> findByParking(String parking);
+    List<HomeSale> findByBhk(Integer bhk);
+    List<HomeSale> findByFurnished(String furnished);
 }

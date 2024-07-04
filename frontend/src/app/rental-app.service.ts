@@ -1,8 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import  './property-sale-form/postHome';
 import { AxiosService } from './axios.service';
+import { text } from '@fortawesome/fontawesome-svg-core';
+import './property-list/saveLikedAds'
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +56,24 @@ export class RentalAppService {
   }
 
   getNames(firstName:string): Observable<any> {
-    return this.http.get(`/firstName/${firstName}`);
+    return this.http.get(`http://localhost:8080/firstName/${firstName}`);
   }
+
+  getLogin(login:any):Observable<any>{
+    return this.http.get(`http://localhost:8080/login/${login}`);
+  }
+
+  getNameAfterLogin(login: any) {
+    return this.http.get(`http://localhost:8080/login/${login}/firstName` , {responseType:'text'}
+      );
+  }
+
+  getId(login:any){
+    return this.http.get(`http://localhost:8080/login/${login}/id`);
+  }
+
+  saveLikedAds(login:any, data:any):Observable<saveLikedAds[]>{
+    return this.http.post<saveLikedAds[]>(`http://localhost:8080/login/save?login=${login}`,data);
+  }
+
 }

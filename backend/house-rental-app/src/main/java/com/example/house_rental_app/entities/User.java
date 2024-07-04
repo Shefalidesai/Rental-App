@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -16,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "app_user")
 
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,4 +38,9 @@ public class User {
     @Column(nullable = false)
     @Size(max = 100)
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<SavedAds> savedAds;
+
+
 }

@@ -26,10 +26,12 @@ public class SecurityConfig extends WebConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(HttpMethod.GET,"/homes/**").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/homes/{construction}").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/homes/createAd").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login","/register").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/homes/**","/login/savedAds").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/homes/createAd").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/firstName/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/login/{login}/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/login/save").permitAll()
                         .anyRequest().authenticated())
         ;
         return http.build();

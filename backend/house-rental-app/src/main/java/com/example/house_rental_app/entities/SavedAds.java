@@ -1,21 +1,26 @@
 package com.example.house_rental_app.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
 @Entity
-@Table(name = "app_sale")
-public class HomeSale {
+@Table (name = "saved_Ads")
+public class SavedAds {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "sellerName", nullable = false)
     private String sellerName;
@@ -49,7 +54,7 @@ public class HomeSale {
 
     @Column(name = "city" ,nullable = false)
     private String city;
-    
+
     @Column(name = "floorNo", nullable = false)
     private Long floorNo;
 
@@ -67,8 +72,4 @@ public class HomeSale {
 
     @Column(name = "construction", nullable = false)
     private String construction;
-
-    @OneToMany(mappedBy = "homeSale", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Image> images;
-
 }

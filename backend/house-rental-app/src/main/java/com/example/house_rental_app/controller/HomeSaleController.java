@@ -26,14 +26,35 @@ public class HomeSaleController {
         return homeSaleService.getSaleId(id);
     }
 
+    // new/old construction
     @GetMapping("/construction/{construction}")
     public List<HomeSale> getHomeSaleByConstruction(@PathVariable String construction) {
         return homeSaleService.getByConstruction(construction);
     }
 
+    //buy/rent/pg/commercial
     @GetMapping("/category/{category}")
     public List<HomeSale> getHomeSaleByCategory(@PathVariable String category){
         return homeSaleService.getByCategory(category);
+    }
+
+    @GetMapping("/city/{city}")
+    public List<HomeSale> getHomeSaleByCity(@PathVariable String city){
+        return homeSaleService.getByCity(city);
+    }
+
+    @GetMapping("/bhk/{bhk}")
+    public List<HomeSale> getByBHK(@PathVariable Integer bhk){
+        return homeSaleService.getByBhk(bhk);
+    }
+    @GetMapping("/parking/{parking}")
+    public List<HomeSale> getByParking(@PathVariable String parking){
+        return homeSaleService.getByParking(parking);
+    }
+
+    @GetMapping("/furnished/{furnished}")
+    public List<HomeSale> getByFurnishing(@PathVariable String furnished){
+        return homeSaleService.getByFurnishing(furnished);
     }
 
     @PostMapping("/createAd")

@@ -14,7 +14,6 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-@CrossOrigin(origins = "http://localhost:4200")
 public class HomeSaleService {
         private final HomeSaleRepo homeSaleRepo;
 
@@ -37,6 +36,22 @@ public class HomeSaleService {
 
         public List<HomeSale> getByCategory(String category){
             return homeSaleRepo.findByCategory(category);
+        }
+
+        public List<HomeSale> getByCity(String city){
+            return homeSaleRepo.findByCity(city);
+        }
+
+        public List<HomeSale> getByBhk(Integer bhk){
+            return homeSaleRepo.findByBhk(bhk);
+        }
+
+        public List<HomeSale> getByParking(String parking){
+            return homeSaleRepo.findByParking(parking);
+        }
+
+        public List<HomeSale> getByFurnishing(String furnished){
+            return homeSaleRepo.findByFurnished(furnished);
         }
 
         public HomeSale saveSale(HomeSale homeSale){

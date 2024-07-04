@@ -14,7 +14,6 @@ export class LoginFormComponent {
 
   @Output() onSubmitLoginEvent = new EventEmitter();
   @Output() onSubmitRegisterEvent = new EventEmitter();
-  @Output() onSuccessfulLogin = new EventEmitter();
 
 
   active: string = "login";
@@ -29,9 +28,6 @@ export class LoginFormComponent {
   constructor(private http: HttpClient,private axiosService: AxiosService,private router:Router,private service:RentalAppService){};
 
  
-  getName():void{
-  this.onSuccessfulLogin.emit({"firstName": this.firstName});
-  }
 
   toggleForm(tab: 'signin' | 'signup'): void {
     this.activeTab = tab;
