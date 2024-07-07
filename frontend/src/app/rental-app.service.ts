@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import  './property-sale-form/postHome';
 import { AxiosService } from './axios.service';
 import { text } from '@fortawesome/fontawesome-svg-core';
@@ -15,6 +15,8 @@ export class RentalAppService {
 
   private baseUrl='http://localhost:8080/homes';
   private postApi='http://localhost:8080/homes/createAd';
+  private uploadImg = 'http://localhost:8080/api/images';
+
   data!: string;
 
 
@@ -74,6 +76,30 @@ export class RentalAppService {
 
   saveLikedAds(login:any, data:any):Observable<saveLikedAds[]>{
     return this.http.post<saveLikedAds[]>(`http://localhost:8080/login/save?login=${login}`,data);
+  }
+
+  uploadImages(files: File[]): Observable<HttpResponse<any>> {
+    const formData: FormData = new FormData();
+    
+    files.forEach(file => {
+      formData.append('files', file, file.name);
+      console.log(file,file.name);
+      
+    });
+
+ 
+
+    return this.http.post<any>(`${this.uploadImg}/upload`, formData, {
+      headers: new HttpHeaders({
+        'Accept': 'application/json'
+      }),
+      observe: 'response'
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+  private handleError(error: HttpErrorResponse) {
+    return throwError(`Error: ${error.message}`);
   }
 
 }

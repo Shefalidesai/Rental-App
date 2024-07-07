@@ -56,7 +56,7 @@ public class AuthController {
         return ResponseEntity.ok( userService.getFirstNameById(login));
     }
 
-    @PostMapping("/login/save")
+    /*@PostMapping("/login/save")
     public ResponseEntity<SavedAdsDTO> saveLikeAds(@RequestBody SavedAdsDTO savedAdsDTO, @RequestParam String login) {
         SavedAdsDTO savedAdsDTO1=savedAdsService.saveLiked(savedAdsDTO,login);
         return ResponseEntity.ok(savedAdsDTO1);
@@ -66,6 +66,6 @@ public class AuthController {
     public ResponseEntity<List<SavedAdsDTO>> getSavedAds(@RequestParam String login) {
         List<SavedAdsDTO> savedAdsList = savedAdsService.getsavedLike(login);
         return ResponseEntity.ok(savedAdsList);
-    }
+    }*/
 
 }

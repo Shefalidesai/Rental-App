@@ -1,7 +1,6 @@
-.container {
-  font-family: Arial, sans-serif;
+*{
+  font-family: "Bona Nova SC", serif;
 }
-
 header {
   display: flex;
   justify-content: space-between;
@@ -27,4 +26,5 @@ header {
 }
 nav button {
   margin: 0 10px;
+  font-weight: 500;
 }

@@ -46,8 +46,7 @@ export class ContentComponent implements OnInit {
 	  });
   
 	  this.axiosService.setAuthToken(response.data.token);
-	  this.login = response.data.login;
-	  
+	 
 	  this.message = 'Login successfully!';
 	  this.showMessage = true;
 	  this.componentToShow = "messages";
@@ -55,7 +54,7 @@ export class ContentComponent implements OnInit {
 	  this.showAfterLogin = true;
   
 	  try {
-		const data = await this.service.getNameAfterLogin(this.login).toPromise();
+		const data = await this.service.getNameAfterLogin(response.data.login).toPromise();
 		this.userAfterLogin= data;
 	  } catch (error) {
 		console.error("Error retrieving name after login", error);
@@ -89,7 +88,7 @@ export class ContentComponent implements OnInit {
 	
 		  // Setting the auth token and first name from the response
 		  this.axiosService.setAuthToken(response.data.token);
-		  this.firstName = response.data.firstName;
+		//   this.firstName = response.data.firstName;
 	
 		  // Displaying the registration success message
 		  this.message = 'Registration successful!';

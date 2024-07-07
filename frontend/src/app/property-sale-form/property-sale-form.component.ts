@@ -3,6 +3,10 @@ import { RentalAppService } from '../rental-app.service';
 import './postHome';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'app-property-sale-form',
@@ -33,6 +37,10 @@ export class PropertySaleFormComponent implements OnInit  {
     construction:'',
     images: [],
   }
+
+  selectedFiles!: File[];
+  message1: string = '';
+
 
   constructor(private service:RentalAppService, private fb: FormBuilder,private http: HttpClient){}
   
@@ -95,5 +103,29 @@ export class PropertySaleFormComponent implements OnInit  {
             console.error('Error submitting form', error);
           });
         }
+    }
+
+    onFileSelected(event: any): void {
+      this.selectedFiles = Array.from(event.target.files);
+    }
+  
+    onUpload(): void {
+      if (this.selectedFiles.length === 0) {
+        this.message1 = 'Please select files to upload.';
+        return;
+      }
+  
+      this.service.uploadImages(this.selectedFiles).subscribe(
+        response => {
+          if (response.status === 200) {
+            this.message1 = 'Images uploaded successfully';
+          } else {
+            this.message1 = 'Image upload failed';
+          }
+        },
+        error => {
+          this.message1 = `Error: ${error}`;
+        }
+      );
     }
 }

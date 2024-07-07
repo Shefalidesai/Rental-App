@@ -16,11 +16,13 @@ export class PropertyListComponent  implements OnInit {
   selectedButton: string = 'Buy';
   selectedBhk: number = 1;
   furnishing: string = '';
-  parking: string = 'yes';
-  city: string = 'Mumbai';
+  parking: string = '';
+  city: string = '';
   homes:HomeSales[] = [];
   login!:string;
   getUserName!:any;
+  isLiked: boolean = false;
+
 
 
   constructor(private service:RentalAppService, private http: HttpClient) { }
@@ -29,12 +31,33 @@ export class PropertyListComponent  implements OnInit {
     this.getHomeSale();
    }
 
+   toggleLike(): void {
+    this.isLiked = !this.isLiked;
+    this.saveLikeAds();  // Call the method to handle the "like" action
+  }
   getHomeSale():void{
     this.service.getHomeSales('/category/Rent').subscribe((data:HomeSales[])=>{
       this.homes=data;
       console.log(data);
      
     })} 
+
+    selectButton( input: string): void {
+      this.selectedButton = input
+     if(input=='Rent'){
+      this.getHomeSale();
+     }else if(input=='PG'){
+      this.service.getHomeSales('/category/PG').subscribe((data:HomeSales[])=>{
+        this.homes=data;
+        console.log(this.selectedBhk+'bhk'+data);
+      })
+     }else{
+      this.service.getHomeSales('/category/PG').subscribe((data:HomeSales[])=>{
+        this.homes=data;
+        console.log(this.selectedBhk+'bhk'+data);
+      })
+     }
+    }
 
     onBhkChange(){
       this.service.getHomeSales('/bhk'+'/'+this.selectedBhk).subscribe((data:HomeSales[])=>{

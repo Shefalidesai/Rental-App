@@ -1,112 +1,117 @@
-<section class="home">
+<!-- <section class="home">
   <div class="rhombus2"></div>
-</section>
+</section> -->
 <div class="container mt-5">
-  <h2>Post Property Ad</h2>
+  <h2>Post Property</h2>
   <div class="row">
     <div class="col-md-6" class="form-box">
-     
-      <form [formGroup]="saleForm" (ngSubmit)="onSubmit()" >
-        <div class="mb-3">
-          <label for="sellerName" class="form-label">Seller Name</label>
-          <input type="text" class="form-control" id="sellerName" formControlName="sellerName" name="sellerName">
-        </div>
-        <div class="mb-3">
-          <label for="towerName" class="form-label">Tower/Building Name</label>
-          <input type="text" class="form-control" id="sellerName" formControlName="towerName" name="sellerName">
-        </div>
-        <div class="mb-3">
-          <label for="price" class="form-label">Price</label>
-          <input type="number" class="form-control" id="price" formControlName="price" name="price">
-        </div>
-        <div class="mb-3">
-          <label for="address" class="form-label">Address</label>
-          <input type="text" class="form-control" id="address" formControlName="address" name="address">
-        </div>
-        <div class="mb-3">
-          <label for="area" class="form-label">Carpet Area</label>
-          <input type="text" class="form-control" id="area" formControlName="carpetArea" name="area" placeholder="sqft">
-        </div>
-        <div class="mb-3">
-          <label for="city" class="form-label">City</label>
-          <input type="text" class="form-control" id="city" formControlName="city" name="city">
-        </div>
-        <div class="mb-3">
-          <label for="town" class="form-label">Town</label>
-          <input type="text" class="form-control" id="town" formControlName="town" name="town">
-        </div>
-        <div class="mb-3">
-          <label for="bhk" class="form-label">BHK</label>
-          <input type="text" class="form-control" id="bhk" formControlName="bhk" name="bhk">
-        </div>
-        <div class="mb-3">
-          <label for="furnished" class="form-label">Furnished</label>
-          <select class="form-select" id="furnished" formControlName="furnished" name="furnished">
-            <option value="SemiFurnished">Semi Furnished</option>
-            <option value="UnFurnished">UnFurnished</option>
-            <option value="Fully Furnished">Fully Furnished</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="ownerType" class="form-label">Owner Type</label>
-          <select class="form-select" id="ownerType" formControlName="ownerType" name="ownerType">
-            <option value="Owner">Owner</option>
-            <option value="Agent">Agent</option>
-            <option value="Builder">Builder</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="purpose" class="form-label">Purpose</label>
-          <select class="form-select" id="purpose" formControlName="category" name="purpose">
-            <option value="Sell">Sell</option>
-            <option value="Rent">Rent</option>
-            <option value="PG">List as PG</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="floorNo" class="form-label">floorNo</label>
-          <input type="text" class="form-control" id="address" formControlName="floorNo" name="address">
-        </div>
-        <div class="mb-3">
-          <label for="totalFloors" class="form-label">totalFloors</label>
-          <input type="text" class="form-control" id="address" formControlName="totalFloors" name="address">
-        </div>
-        <div class="mb-3">
-          <label for="parking" class="form-label">Parking</label>
-          <select class="form-select" id="ownerType" formControlName="parking" name="parking">
-            <option value="Available">Available</option>
-            <option value="Not Available">Not Available</option>
-          </select>
-          </div>
-          <div class="mb-3">
-            <label for="construction" class="form-label">Construction</label>
-            <select class="form-select" id="construction" formControlName="construction" name="construction">
-              <option value="Old">Old</option>
-              <option value="New">New</option>
-            </select>
-          </div>
-        <div class="mb-3">
-          <label for="contactNumber" class="form-label">Your contact number</label>
-          <div class="input-group">
-            <span class="input-group-text">IND +91</span>
-            <input type="text" class="form-control" id="contactNumber" formControlName="phoneNo" name="contactNumber">
-          </div>
-        </div>
-        <!-- <div class="mb-3">
-        
-            <label for="images">Select Images</label>
-            <input type="file" id="images" (change)="onFileChange($event)" multiple class="form-control">
-          
-          <button type="submit" class="btn btn-primary">Upload</button>
-        </div> -->
-        <button type="submit"  class="btn btn-primary">Submit</button>
+      <form [formGroup]="saleForm" (ngSubmit)="onSubmit()">
+        <mat-card>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Seller Name</mat-label>
+            <input matInput type="text" formControlName="sellerName" name="sellerName">
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Tower/Building Name</mat-label>
+            <input matInput type="text" formControlName="towerName" name="towerName">
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Address</mat-label>
+            <input matInput type="text" formControlName="address" name="address">
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>LandMark</mat-label>
+            <input matInput type="text" formControlName="landMark" name="landMark">
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Town</mat-label>
+            <input matInput type="text" formControlName="town" name="town">
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>City</mat-label>
+            <mat-select formControlName="city" name="city">
+              <mat-option value="Mumbai">Mumbai</mat-option>
+              <mat-option value="Bangalore">Bangalore</mat-option>
+              <mat-option value="Delhi">Delhi</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Carpet Area</mat-label>
+            <input matInput type="text" formControlName="carpetArea" name="carpetArea" placeholder="sqft">
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Price</mat-label>
+            <span matTextPrefix>₹&nbsp;</span>
+            <input matInput type="number" formControlName="price" name="price">
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>BHK</mat-label>
+            <input matInput type="text" formControlName="bhk" name="bhk">
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Furnished</mat-label>
+            <mat-select formControlName="furnished" name="furnished">
+              <mat-option value="SemiFurnished">Semi Furnished</mat-option>
+              <mat-option value="UnFurnished">UnFurnished</mat-option>
+              <mat-option value="Fully Furnished">Fully Furnished</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Owner Type</mat-label>
+            <mat-select formControlName="ownerType" name="ownerType">
+              <mat-option value="Owner">Owner</mat-option>
+              <mat-option value="Agent">Agent</mat-option>
+              <mat-option value="Builder">Builder</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Purpose</mat-label>
+            <mat-select formControlName="category" name="purpose">
+              <mat-option value="Sell">Sell</mat-option>
+              <mat-option value="Rent">Rent</mat-option>
+              <mat-option value="PG">List as PG</mat-option>
+              <mat-option value="Commercial">Commercial</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Floor No</mat-label>
+            <input matInput type="text" formControlName="floorNo" name="floorNo">
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Total Floors</mat-label>
+            <input matInput type="text" formControlName="totalFloors" name="totalFloors">
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Parking</mat-label>
+            <mat-select formControlName="parking" name="parking">
+              <mat-option value="Available">Available</mat-option>
+              <mat-option value="Not Available">Not Available</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Construction</mat-label>
+            <mat-select formControlName="construction" name="construction">
+              <mat-option value="Old">Old</mat-option>
+              <mat-option value="New">New</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Your contact number</mat-label>
+            <div class="input-group">
+              <span class="input-group-text">IND +91</span>
+              <input matInput type="text" formControlName="phoneNo" name="contactNumber">
+            </div>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+        </mat-card>
       </form>
       <app-message-box [showMessage]="showMessage" [message]="message"></app-message-box>
-      <div class="col-md-6" style="align-content: center;">
-        <img src="assets/images/Ad.png" alt="Property Ad" class="img-fluid">
-      </div>
     </div>
-    
   </div>
 </div>
-
+<div class="container">
+  <h2>Upload Images</h2>
+  <input type="file" (change)="onFileSelected($event)" multiple />
+  <button (click)="onUpload()">Upload</button>
+  <p>{{ message }}</p>
+</div>

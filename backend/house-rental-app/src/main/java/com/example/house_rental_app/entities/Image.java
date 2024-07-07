@@ -12,22 +12,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @Entity
+@Table(name = "app_image")
 public class Image {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    private String fileName;
 
-    @Column(name = "type", nullable = false)
-    private String type;
+    private String fileType;
 
     @Lob
-    @Column(name = "imageData", length = 5000)
-    private byte[] imageData;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "homeSale_id", nullable = false)
-    private HomeSale homeSale;
+    private byte[] data;
 }

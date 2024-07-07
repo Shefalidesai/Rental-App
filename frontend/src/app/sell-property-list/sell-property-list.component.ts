@@ -9,12 +9,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SellPropertyListComponent  implements OnInit {
 
-
-  selectedButton: string = 'Buy';
-  bhk!:number;
-  furnishing!: string;
-  parking!: string;
-  city!: string;
+  selectedBhk: number = 0;
+  furnishing: string = '';
+  parking: string = '';
+  city: string = '';
   filteredHomes: HomeSales[] = [];
   homes:HomeSales[] = [];
 
@@ -26,19 +24,40 @@ export class SellPropertyListComponent  implements OnInit {
    }
 
   getHomeSale():void{
-    this.service.getHomeSales('/category/Sale').subscribe((data:HomeSales[])=>{
+    this.service.getHomeSales('/category/Sell').subscribe((data:HomeSales[])=>{
       this.homes=data;
       console.log(data);
       
     })
   }
 
-
-  selectButton(button: string): void {
-    this.selectedButton = button;
-    
+  onBhkChange(){
+    this.service.getHomeSales('/bhk'+'/'+this.selectedBhk).subscribe((data:HomeSales[])=>{
+      this.homes=data;
+      console.log(this.selectedBhk+'bhk'+data);
+    })
   }
 
+  onFurnishingChange(){
+    this.service.getHomeSales('/furnished'+'/'+this.furnishing).subscribe((data:HomeSales[])=>{
+      this.homes=data;
+      console.log(this.furnishing+'furnished'+data);
+    })
+  }
+
+  onParkingChange(){
+    this.service.getHomeSales('/furnished'+'/'+this.furnishing).subscribe((data:HomeSales[])=>{
+      this.homes=data;
+      console.log(this.furnishing+'furnished'+data);
+    })
+  }
+
+  onCityChange(){
+    this.service.getHomeSales('/city'+'/'+this.city).subscribe((data:HomeSales[])=>{
+      this.homes=data;
+      console.log(this.city+'city'+data);
+    })
+  }
   
 
 }

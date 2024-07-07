@@ -61,20 +61,6 @@ public class HomeSaleService {
         public void deleteSale(Long id){
             homeSaleRepo.deleteById(id);
         }
-
-    public void saveFile(MultipartFile file) {
-        String uploadDir = "uploads/";
-        File uploadDirectory = new File(uploadDir);
-        if (!uploadDirectory.exists()) {
-            uploadDirectory.mkdirs();
-        }
-        try {
-            File uploadedFile = new File(uploadDir + file.getOriginalFilename());
-            file.transferTo(uploadedFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
 
 

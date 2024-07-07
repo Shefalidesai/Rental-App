@@ -18,12 +18,14 @@ import { PropertyListComponent } from './property-list/property-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
 import { SilderComponent } from './silder/silder.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RentalAppService } from './rental-app.service';
@@ -63,8 +65,15 @@ import { MessageBoxComponent } from './message-box/message-box.component';
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    MatTabsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatDividerModule,
   
   ],
   providers: [AxiosService,RentalAppService],

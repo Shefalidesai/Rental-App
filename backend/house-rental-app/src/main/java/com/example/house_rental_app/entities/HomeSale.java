@@ -68,7 +68,4 @@ public class HomeSale {
     @Column(name = "construction", nullable = false)
     private String construction;
 
-    @OneToMany(mappedBy = "homeSale", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Image> images;
-
 }
