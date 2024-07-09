@@ -29,8 +29,13 @@ public class ImageController {
         }
     }
 
-   /* @GetMapping
-    public List<Image> getAllImages() {
-        return imageService.getAllImages();
-    }*/
+    @GetMapping("/group/{groupId}")
+    public ResponseEntity<List<Image>> getImagesByGroupId(@PathVariable Long groupId) {
+        List<Image> images = imageService.getImagesByGroupId(groupId);
+        if (images.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(images);
+    }
+
 }

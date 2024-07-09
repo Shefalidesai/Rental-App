@@ -18,6 +18,7 @@ export class RentalAppService {
   private uploadImg = 'http://localhost:8080/api/images';
 
   data!: string;
+  got!:any;
 
 
   getHomeSales(endpoint: string = ''):Observable<HomeSales[]>{
@@ -44,11 +45,6 @@ export class RentalAppService {
     formData.append('purpose', postHome.category);
     formData.append('town',postHome.town);
     
-    // for (let i = 0; i < postHome.images.length; i++) {
-    //   formData.append('images', postHome.images[i], postHome.images[i].name);
-    // }
-
-    // Adding Authorization header
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + localStorage.getItem('token')  // Assuming token is stored in localStorage after login
     });
@@ -78,8 +74,9 @@ export class RentalAppService {
     return this.http.post<saveLikedAds[]>(`http://localhost:8080/login/save?login=${login}`,data);
   }
 
-  uploadImages(files: File[]): Observable<HttpResponse<any>> {
-    const formData: FormData = new FormData();
+  uploadImages(files: File[], formData): Observable<HttpResponse<any>> {
+   
+    
     
     files.forEach(file => {
       formData.append('files', file, file.name);

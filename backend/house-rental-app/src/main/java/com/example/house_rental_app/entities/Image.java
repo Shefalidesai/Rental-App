@@ -19,10 +19,17 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String sellerName;
     private String fileName;
 
     private String fileType;
 
     @Lob
     private byte[] data;
+
+    private Long groupId;
+    
+
+
+
 }

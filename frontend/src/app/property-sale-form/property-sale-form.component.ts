@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RentalAppService } from '../rental-app.service';
 import './postHome';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'app-property-sale-form',
@@ -17,6 +13,7 @@ export class PropertySaleFormComponent implements OnInit  {
   saleForm!: FormGroup;
   showMessage: boolean = false;
   message: string = '';
+
   postHomeSale: postHome={
     sellerName: ' ',
     towerName: ' ',
@@ -40,9 +37,11 @@ export class PropertySaleFormComponent implements OnInit  {
 
   selectedFiles!: File[];
   message1: string = '';
+ 
 
-
-  constructor(private service:RentalAppService, private fb: FormBuilder,private http: HttpClient){}
+  constructor(private service:RentalAppService, private fb: FormBuilder,private http: HttpClient){
+   
+  }
   
   ngOnInit(): void {
     this.saleForm = this.fb.group({
@@ -66,56 +65,50 @@ export class PropertySaleFormComponent implements OnInit  {
       
     }); 
   }
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      this.postHomeSale.images = Array.from(event.target.files);
+  
+  onSubmit() {
+    if (this.saleForm.valid) {
+      const formData = new FormData();
+
+      // Append all form fields
+      Object.keys(this.saleForm.controls).forEach(key => {
+        formData.append(key, this.saleForm.get(key)?.value);
+      });
+
+      this.http.post('http://localhost:8080/homeSale/createAd', formData)
+        .subscribe(response => {
+          console.log('Form submitted successfully!', response);
+          this.message = 'Form submitted successfully!';
+          this.showMessage = true;
+
+          setTimeout(() => {
+            this.showMessage = false;
+            window.location.reload();
+          }, 3000); // Hide the message after 3 seconds
+        }, error => {
+          console.error('Error submitting form', error);
+        });
     }
   }
 
-  
-    onSubmit() {
-      if (this.saleForm.valid) {
-        const formData = new FormData();
-        
-        // Append all form fields
-        Object.keys(this.saleForm.controls).forEach(key => {
-          formData.append(key, this.saleForm.get(key)?.value);
-        });
-        
-        // Append images
-        this.postHomeSale.images.forEach((image: File, index: number) => {
-          formData.append('images', image, image.name);
-        });
-        
-        this.http.post('http://localhost:8080/homes/createAd', this.saleForm.value)
-          .subscribe(response => {
-            console.log('Form submitted successfully!', response);
-            this.message = 'Form submitted successfully!';
-            this.showMessage = true;
-            
-
-    setTimeout(() => {
-      this.showMessage = false;
-      window.location.reload();
-    }, 3000); // Hide the message after 3 seconds
-
-          }, error => {
-            console.error('Error submitting form', error);
-          });
-        }
-    }
-
-    onFileSelected(event: any): void {
-      this.selectedFiles = Array.from(event.target.files);
-    }
+  onFileSelected(event: any) {
+    this.selectedFiles = Array.from(event.target.files);
+  }
   
     onUpload(): void {
+      const formData = new FormData();
+       // Append all form fields
+       Object.keys(this.saleForm.controls).forEach(key => {
+        formData.append(key, this.saleForm.get(key)?.value);
+      });
+    
+      
       if (this.selectedFiles.length === 0) {
         this.message1 = 'Please select files to upload.';
         return;
       }
   
-      this.service.uploadImages(this.selectedFiles).subscribe(
+      this.service.uploadImages(this.selectedFiles,formData).subscribe(
         response => {
           if (response.status === 200) {
             this.message1 = 'Images uploaded successfully';
