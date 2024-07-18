@@ -33,6 +33,7 @@ import { SectionanimationComponent } from './sectionanimation/sectionanimation.c
 import { SellPropertyListComponent } from './sell-property-list/sell-property-list.component';
 import { NewConstructionComponent } from './new-construction/new-construction.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
+import { SavedAdsComponent } from './saved-ads/saved-ads.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MessageBoxComponent } from './message-box/message-box.component';
     SectionanimationComponent,
     SellPropertyListComponent,
     NewConstructionComponent,
-    MessageBoxComponent
+    MessageBoxComponent,
+    SavedAdsComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -66,14 +68,10 @@ import { MessageBoxComponent } from './message-box/message-box.component';
     MatInputModule,
     MatFormFieldModule,
     HttpClientModule,
-    MatInputModule,
-    MatButtonModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatCardModule,
-    MatIconModule,
     MatToolbarModule,
-    MatDividerModule,
+    MatDividerModule
   
   ],
   providers: [AxiosService,RentalAppService],

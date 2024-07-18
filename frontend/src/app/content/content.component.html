@@ -8,7 +8,7 @@
 	<app-login-form *ngIf="showLogin"  (onSubmitLoginEvent)="onLogin($event)" (onSubmitRegisterEvent)="onRegister($event)" />
   <app-auth-content *ngIf="componentToShow == 'messages'" />
   <app-message-box  [showMessage]="showMessage" [message]="message"></app-message-box>
-  <div *ngIf="showName">
+  <div *ngIf="showName" class="displayName">
     <p>User Data:</p>
     <pre>{{ user }}</pre>
   </div>

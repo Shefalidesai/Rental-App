@@ -28,10 +28,11 @@ public class SecurityConfig extends WebConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, "/login","/register").permitAll()
                         .requestMatchers(HttpMethod.GET,"/homes/**","/login/savedAds").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/homes/createAd","/api/images/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/images/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/firstName/**","/api/images/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/login/{login}/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"/login/save").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/homes/saveAd").permitAll()
                         .anyRequest().authenticated())
         ;
         return http.build();

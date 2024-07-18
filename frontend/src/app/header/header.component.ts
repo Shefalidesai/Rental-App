@@ -54,4 +54,7 @@ export class HeaderComponent implements OnInit {
   onLogOut(){
     this.router.navigate([' ']);
   }
+  savedAds(){
+    this.router.navigate(['saved-ads']);
+  }
 }

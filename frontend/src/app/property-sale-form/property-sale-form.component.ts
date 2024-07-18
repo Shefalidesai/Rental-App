@@ -13,28 +13,7 @@ export class PropertySaleFormComponent implements OnInit  {
   saleForm!: FormGroup;
   showMessage: boolean = false;
   message: string = '';
-
-  postHomeSale: postHome={
-    sellerName: ' ',
-    towerName: ' ',
-    price: 0,
-    address: ' ',
-    landMark:' ',
-    carpetArea: 0,
-    bhk: 0,
-    town:' ',
-    furnished: ' ',
-    ownerType: ' ',
-    city: ' ',
-    floorNo: 0,
-    totalFloors: 0,
-    parking:' ',
-    phoneNo:0,
-    category:' ',
-    construction:'',
-    images: [],
-  }
-
+  postHomeSale!:postHome[];
   selectedFiles!: File[];
   message1: string = '';
  
@@ -66,54 +45,50 @@ export class PropertySaleFormComponent implements OnInit  {
     }); 
   }
   
-  onSubmit() {
+  onSubmit(): void {
     if (this.saleForm.valid) {
-      const formData = new FormData();
-
-      // Append all form fields
-      Object.keys(this.saleForm.controls).forEach(key => {
-        formData.append(key, this.saleForm.get(key)?.value);
-      });
-
-      this.http.post('http://localhost:8080/homeSale/createAd', formData)
-        .subscribe(response => {
-          console.log('Form submitted successfully!', response);
-          this.message = 'Form submitted successfully!';
+      const formValues = this.saleForm.value;
+      console.log(formValues);
+      
+      this.service.postHomeSale(formValues).subscribe(
+        response => {
           this.showMessage = true;
-
+          this.message = 'Property posted successfully!';
           setTimeout(() => {
-            this.showMessage = false;
             window.location.reload();
-          }, 3000); // Hide the message after 3 seconds
-        }, error => {
-          console.error('Error submitting form', error);
-        });
+          }, 2000);
+        },
+        error => {
+          this.showMessage = true;
+          this.message = 'Failed to post property.';
+        }
+      );
     }
   }
+
 
   onFileSelected(event: any) {
     this.selectedFiles = Array.from(event.target.files);
   }
   
-    onUpload(): void {
-      const formData = new FormData();
-       // Append all form fields
-       Object.keys(this.saleForm.controls).forEach(key => {
-        formData.append(key, this.saleForm.get(key)?.value);
-      });
-    
+    onUpload(): void {  
       
       if (this.selectedFiles.length === 0) {
         this.message1 = 'Please select files to upload.';
         return;
       }
   
-      this.service.uploadImages(this.selectedFiles,formData).subscribe(
+      this.service.uploadImages(this.selectedFiles,  this.saleForm.value.sellerName).subscribe(
         response => {
           if (response.status === 200) {
-            this.message1 = 'Images uploaded successfully';
+            this.message = 'Images posted successfully!';
+            setTimeout(() => {
+             
+            }, 2000);
           } else {
-            this.message1 = 'Image upload failed';
+            this.message = 'Images failed to post!';
+            setTimeout(() => {
+            }, 2000);
           }
         },
         error => {

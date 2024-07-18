@@ -3,54 +3,31 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import  './property-sale-form/postHome';
 import { AxiosService } from './axios.service';
-import { text } from '@fortawesome/fontawesome-svg-core';
 import './property-list/saveLikedAds'
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class RentalAppService {
 
   constructor(private http:HttpClient, private axiosService: AxiosService) { }
 
   private baseUrl='http://localhost:8080/homes';
-  private postApi='http://localhost:8080/homes/createAd';
-  private uploadImg = 'http://localhost:8080/api/images';
-
-  data!: string;
-  got!:any;
-
+  private postApi='http://localhost:8080/homes/saveAd';
+  private uploadImg= 'http://localhost:8080/api/images';
+  private apiUrl='http://localhost:8080/login/save';
 
   getHomeSales(endpoint: string = ''):Observable<HomeSales[]>{
     return this.http.get<HomeSales[]>(`${this.baseUrl}${endpoint}`);
   }
 
-  postHomeSale(postHome:postHome):Observable<any>{
-    const formData:FormData=new FormData();
-
-    formData.append('sellerName', postHome.sellerName);
-    formData.append('towerName', postHome.towerName);
-    formData.append('price', postHome.price.toString());
-    formData.append('address', postHome.address);
-    formData.append('address', postHome.landMark);
-    formData.append('carpetArea', postHome.carpetArea.toString());
-    formData.append('bhk', postHome.bhk.toString());
-    formData.append('furnished', postHome.furnished);
-    formData.append('ownerType', postHome.ownerType);
-    formData.append('address', postHome.city);
-    formData.append('address', postHome.floorNo.toString());
-    formData.append('address', postHome.totalFloors.toString());
-    formData.append('address', postHome.parking);
-    formData.append('contactNumber', postHome.phoneNo.toString());
-    formData.append('purpose', postHome.category);
-    formData.append('town',postHome.town);
-    
+  postHomeSale(formValues:any): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + localStorage.getItem('token')  // Assuming token is stored in localStorage after login
+      'Accept': 'application/json'
     });
-
-    return this.http.post(this.postApi, formData);
-
+    console.log(formValues);
+    return this.http.post<any>(`${this.postApi}`, formValues, { headers });
   }
 
   getNames(firstName:string): Observable<any> {
@@ -62,29 +39,37 @@ export class RentalAppService {
   }
 
   getNameAfterLogin(login: any) {
-    return this.http.get(`http://localhost:8080/login/${login}/firstName` , {responseType:'text'}
-      );
+    return this.http.get(`http://localhost:8080/login/${login}/firstName` , {responseType:'text'});
   }
 
   getId(login:any){
     return this.http.get(`http://localhost:8080/login/${login}/id`);
   }
 
-  saveLikedAds(login:any, data:any):Observable<saveLikedAds[]>{
-    return this.http.post<saveLikedAds[]>(`http://localhost:8080/login/save?login=${login}`,data);
+  saveLikedAds(data:any, login:any ):Observable<saveLikedAds[]>{
+    console.log(login,"-login");
+    const url = `${this.apiUrl}?login=${login}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(url, data, { headers });
+   }
+
+   getsavedAds(login:any):Observable<HomeSales[]>{
+    const url=`http://localhost:8080/login/savedAds?login=${login}`;
+    return this.http.get<HomeSales[]>(url);
   }
 
-  uploadImages(files: File[], formData): Observable<HttpResponse<any>> {
-   
-    
+  uploadImages(files: File[], sellerName: any): Observable<HttpResponse<any>> {
+    const formData:FormData=new FormData();
+    formData.append('sellerName',sellerName);
+    console.log(sellerName); 
     
     files.forEach(file => {
       formData.append('files', file, file.name);
       console.log(file,file.name);
       
     });
-
- 
 
     return this.http.post<any>(`${this.uploadImg}/upload`, formData, {
       headers: new HttpHeaders({
@@ -95,8 +80,15 @@ export class RentalAppService {
       catchError(this.handleError)
     );
   }
+
+  getImages(sellerName: string): Observable<any> {
+    return this.http.get(`${this.uploadImg}/sellerName/${sellerName}`);
+  }
+
   private handleError(error: HttpErrorResponse) {
     return throwError(`Error: ${error.message}`);
   }
+
+
 
 }

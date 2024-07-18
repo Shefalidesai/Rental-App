@@ -4,48 +4,70 @@ import { RentalAppService } from '../rental-app.service';
 import { HttpClient } from '@angular/common/http';
 import './saveLikedAds'
 import { firstValueFrom } from 'rxjs';
+import { GetLoginService } from '../get-login.service';
 
 
 @Component({
   selector: 'app-property-list',
   templateUrl: './property-list.component.html',
-  styleUrls: ['./property-list.component.css']
+  styleUrls: ['./property-list.component.css'],
 })
 export class PropertyListComponent  implements OnInit {
 
   selectedButton: string = 'Buy';
-  selectedBhk: number = 1;
+  selectedBhk!: number ;
   furnishing: string = '';
   parking: string = '';
   city: string = '';
   homes:HomeSales[] = [];
-  login!:string;
+  login:string | null = null;
   getUserName!:any;
   isLiked: boolean = false;
+  images: any[] = [];
+  sellerName!: string ;
 
-
-
-  constructor(private service:RentalAppService, private http: HttpClient) { }
+  constructor(private service:RentalAppService, private http: HttpClient,private loginservice:GetLoginService) { }
 
   ngOnInit(): void {
     this.getHomeSale();
+    this.loginservice.getLogin().subscribe(login=>{
+        this.login=login
+    })
    }
 
-   toggleLike(): void {
-    this.isLiked = !this.isLiked;
-    this.saveLikeAds();  // Call the method to handle the "like" action
+   toggleLike(home: HomeSales) {
+    this.homes.forEach(h => h.isLiked = false);
+    home.isLiked = !home.isLiked;
+    if (home.isLiked) {
+      this.saveLikeAds(home);
+    }
   }
-  getHomeSale():void{
-    this.service.getHomeSales('/category/Rent').subscribe((data:HomeSales[])=>{
-      this.homes=data;
-      console.log(data);
-     
-    })} 
+  
+
+  async getHomeSale(): Promise<void> {
+    try {
+      const data = await firstValueFrom(this.service.getHomeSales('/all'));
+      this.homes = data;
+  
+      // Fetch images for each home
+      for (let home of this.homes) {
+        const imagesData = await firstValueFrom(this.service.getImages(home.sellerName));
+        home.images = imagesData;
+      }
+  
+      console.log(this.homes);
+    } catch (error) {
+      console.error('Error fetching data', error);
+    }
+  }
 
     selectButton( input: string): void {
       this.selectedButton = input
      if(input=='Rent'){
-      this.getHomeSale();
+      this.service.getHomeSales('/category/Rent').subscribe((data:HomeSales[])=>{
+        this.homes=data;
+        console.log(this.selectedBhk+'bhk'+data);
+      })
      }else if(input=='PG'){
       this.service.getHomeSales('/category/PG').subscribe((data:HomeSales[])=>{
         this.homes=data;
@@ -87,41 +109,36 @@ export class PropertyListComponent  implements OnInit {
       })
     }
 
-    async saveLikeAds() {
+
+    async saveLikeAds(ad:saveLikedAds) {
       try {
-        const homeSales: HomeSales[] = await firstValueFrom(this.service.getHomeSales());
-        this.homes = homeSales;
-    
-        const postData = homeSales.map(data => ({
-          sellerName: data.sellerName,
-          towerName: data.towerName,
-          price: data.price,
-          address: data.address,
-          landMark: data.landMark,
-          carpetArea: data.carpetArea,
-          bhk: data.bhk,
-          furnished: data.furnished,
-          ownerType: data.ownerType,
-          city: data.city,
-          floorNo: data.floorNo,
-          totalFloors: data.totalFloors,
-          parking: data.parking,
-          phoneNo: data.phoneNo,
-          category: data.category,
-          construction: data.construction
-        }));
+        const postData = {
+          sellerName: ad.sellerName,
+          towerName: ad.towerName,
+          price: ad.price,
+          address: ad.address,
+          landMark: ad.landMark,
+          carpetArea: ad.carpetArea,
+          bhk: ad.bhk,
+          town:ad.towerName,
+          furnished: ad.furnished,
+          ownerType: ad.ownerType,
+          city: ad.city,
+          floorNo: ad.floorNo,
+          totalFloors: ad.totalFloors,
+          parking: ad.parking,
+          phoneNo: ad.phoneNo,
+          category: ad.category,
+          construction: ad.construction
+        };
   
-       
-        
         // Assuming saveLikedAds takes postData and login as parameters
-        const savedAdData: saveLikedAds[] = await firstValueFrom(this.service.saveLikedAds(postData, this.login));
-    
+        const savedAdData = await firstValueFrom(this.service.saveLikedAds(postData, this.login));
         console.log(savedAdData);
       } catch (error) {
-        console.error('Error fetching and saving ads', error);
+        console.error('Error saving ad', error);
       }
     }
-    
 }
   
 

@@ -1,22 +1,11 @@
 package com.example.house_rental_app.controller;
 
 
-import com.example.house_rental_app.dto.HomeSaleDTO;
 import com.example.house_rental_app.entities.HomeSale;
-import com.example.house_rental_app.entities.Image;
-import com.example.house_rental_app.mappers.HomeSaleMapper;
-import com.example.house_rental_app.repository.HomeSaleRepo;
-import com.example.house_rental_app.repository.ImageRepo;
 import com.example.house_rental_app.userService.HomeSaleService;
-import com.example.house_rental_app.userService.ImageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -26,9 +15,8 @@ import java.util.List;
 public class HomeSaleController {
 
     private final HomeSaleService homeSaleService;
-    private final ImageService imageService;
 
-   @GetMapping
+   @GetMapping("/all")
     public List<HomeSale> getALLSales(){
        return homeSaleService.getAllSale();
     }
@@ -69,22 +57,15 @@ public class HomeSaleController {
         return homeSaleService.getByFurnishing(furnished);
     }
 
-    @PostMapping(value = "/createAd", consumes = {"multipart/form-data"})
-
-
     @DeleteMapping("/{id}")
     public void deleteHomeSale(@PathVariable Long id){
         homeSaleService.deleteHomeSale(id);
     }
 
-  /*  @PostMapping( "/createAd")
-    public ResponseEntity<HomeSaleDTO> createHomeSale(
-            @RequestBody HomeSaleDTO homeSaleDTO,
-            @RequestBody List<MultipartFile> images) {
-        homeSaleDTO.setImages(images);
-        HomeSaleDTO createdHomeSale = homeSaleService.createHomeSale(homeSaleDTO);
-        return ResponseEntity.ok(createdHomeSale);
-    }*/
+    @PostMapping("/saveAd")
+    public HomeSale createHomeSale(@RequestBody HomeSale homeSale) {
+        return homeSaleService.saveSale(homeSale);
+    }
 
 }
 

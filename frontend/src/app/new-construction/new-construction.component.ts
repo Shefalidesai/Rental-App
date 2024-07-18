@@ -19,7 +19,7 @@ export class NewConstructionComponent  implements OnInit {
    }
 
   getHomeSale():void{
-    this.service.getHomeSales().subscribe((data:HomeSales[])=>{
+    this.service.getHomeSales('/construction/New').subscribe((data:HomeSales[])=>{
       this.homes=data;
       console.log(data);
       

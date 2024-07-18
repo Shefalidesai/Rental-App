@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AxiosService } from '../axios.service';
 import { Router } from '@angular/router';
 import { RentalAppService } from '../rental-app.service';
+import { GetLoginService } from '../get-login.service';
 
 @Component({
   selector: 'app-content',
@@ -26,7 +27,7 @@ export class ContentComponent implements OnInit {
 	showAfterLogin:boolean=false;
 	userAfterLogin!:any;
 
-	constructor(private axiosService: AxiosService, private router:Router,private service:RentalAppService ) { }
+	constructor(private axiosService: AxiosService, private router:Router,private service:RentalAppService,private loginservice:GetLoginService ) { }
 
 	showComponent(componentToShow: string): void {
     this.componentToShow = componentToShow;
@@ -44,8 +45,13 @@ export class ContentComponent implements OnInit {
 		login: input.login,
 		password: input.password
 	  });
+
+
   
 	  this.axiosService.setAuthToken(response.data.token);
+	  this.loginservice.setLogin(input.login);
+	  console.log("inputlogin", input.login);
+	  
 	 
 	  this.message = 'Login successfully!';
 	  this.showMessage = true;

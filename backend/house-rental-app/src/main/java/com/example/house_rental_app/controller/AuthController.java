@@ -5,11 +5,9 @@ import com.example.house_rental_app.dto.CredentialsDto;
 import com.example.house_rental_app.dto.SavedAdsDTO;
 import com.example.house_rental_app.dto.SignUpDto;
 import com.example.house_rental_app.dto.UserDTO;
-import com.example.house_rental_app.entities.SavedAds;
 import com.example.house_rental_app.userService.SavedAdsService;
 import com.example.house_rental_app.userService.UserService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +23,6 @@ public class AuthController {
     private final UserService userService;
     private final UserAuthProvider userAuthProvider;
     private final SavedAdsService savedAdsService;
-
 
     @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody @Valid CredentialsDto credentialsDto) {
@@ -56,7 +53,7 @@ public class AuthController {
         return ResponseEntity.ok( userService.getFirstNameById(login));
     }
 
-    /*@PostMapping("/login/save")
+    @PostMapping("/login/save")
     public ResponseEntity<SavedAdsDTO> saveLikeAds(@RequestBody SavedAdsDTO savedAdsDTO, @RequestParam String login) {
         SavedAdsDTO savedAdsDTO1=savedAdsService.saveLiked(savedAdsDTO,login);
         return ResponseEntity.ok(savedAdsDTO1);
@@ -66,6 +63,5 @@ public class AuthController {
     public ResponseEntity<List<SavedAdsDTO>> getSavedAds(@RequestParam String login) {
         List<SavedAdsDTO> savedAdsList = savedAdsService.getsavedLike(login);
         return ResponseEntity.ok(savedAdsList);
-    }*/
-
+    }
 }

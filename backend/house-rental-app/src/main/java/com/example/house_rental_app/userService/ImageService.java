@@ -20,13 +20,13 @@ public class ImageService {
 
     private final ImageRepo imageRepo;
 
-
     @Transactional
-    public List<Image> saveImages(MultipartFile[] files) throws IOException {
+    public List<Image> saveImages(String sellerName, MultipartFile[] files) throws IOException {
         Long groupId= System.currentTimeMillis();
         List<Image> images = new ArrayList<>();
         for (MultipartFile file : files) {
             Image image = new Image();
+            image.setSellerName(sellerName);
             image.setFileName(file.getOriginalFilename());
             image.setFileType(file.getContentType());
             image.setData(file.getBytes());
@@ -41,5 +41,12 @@ public class ImageService {
         return imageRepo.findByGroupId(groupId);
     }
 
+    public List<Image> getImagesBySellerName(Long groupId, String sellerName){
+        return imageRepo.findByGroupIdAndSellerName(groupId,sellerName);
+    }
+
+    public List<Image> getImageBySellerName(String sellerName){
+        return imageRepo.findBySellerName(sellerName);
+    }
 
 }

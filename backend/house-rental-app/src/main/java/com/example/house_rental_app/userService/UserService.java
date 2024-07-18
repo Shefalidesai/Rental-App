@@ -8,7 +8,6 @@ import com.example.house_rental_app.entities.User;
 import com.example.house_rental_app.exceptions.AppException;
 import com.example.house_rental_app.mappers.UserMapper;
 import com.example.house_rental_app.repository.UserRepo;
-import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;

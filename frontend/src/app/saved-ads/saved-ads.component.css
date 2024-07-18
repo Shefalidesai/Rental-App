@@ -34,18 +34,6 @@
   font-weight: bold;
 }
 
-.example-button-container button {
-  background-color: gray; /* Default color */
-}
-
-.example-button-container button.liked {
-  background-color: red; /* Change to red when liked */
-}
-
-.example-button-container button.mat-fab {
-  color: white; /* Ensure icon color is visible */
-}
-
 .property-details span {
   display: block;
   margin-bottom: 4px;
@@ -124,10 +112,6 @@ mat-form-field {
 .nav-button:hover {
   background-color: white;
   color: #5f2dc4;
-}
-
-.example-button-container button.liked {
-  background-color: red;
 }
 
 .image-grid {

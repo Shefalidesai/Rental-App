@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface ImageRepo extends JpaRepository<Image, Long> {
     List<Image> findByGroupId(Long groupId);
+    List<Image> findByGroupIdAndSellerName(Long groupId, String sellerName);
+    List<Image> findBySellerName(String sellerName);
 }

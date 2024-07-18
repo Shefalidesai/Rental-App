@@ -7,6 +7,7 @@ interface HomeSales {
   landMark:string;
   carpetArea: number;
   bhk: number;
+  town:string;
   furnished: string;
   ownerType: string;
   city: string;
@@ -16,6 +17,8 @@ interface HomeSales {
   phoneNo:number;
   category:string;
   construction:string;
+  images:any;
+  isLiked: boolean;
 }
 
  

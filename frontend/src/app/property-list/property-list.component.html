@@ -44,42 +44,55 @@
 </div>
 
 
-<div >
-<ul style="list-style-type: none;">
-  <li *ngFor="let home of homes">
-    <div class="property-card">
-      <h3 style="padding: 2%; font-weight: 500;">{{home.ownerType}}: <span>{{home.sellerName}}</span><br/>
-        <span>Apartment Name: {{home.towerName}}</span>
-      </h3>
-      <img src="assets/image/img1.jpg" alt="Property Image" class="property-image">
-      <div class="property-info">
-        <div class="property-price">
-          <span>₹ {{home.price}}/monthly</span>
-          <div class="example-button-container">
-            <button mat-fab [class.liked]="isLiked" aria-label="Example icon button with a heart icon" (click)="toggleLike()">
-              <mat-icon>{{ isLiked ? 'favorite' : 'favorite_border' }}</mat-icon>
-            </button>
+<div>
+  <ul style="list-style-type: none;">
+    <li *ngFor="let home of homes">
+      <div class="property-card">
+        <h3 style="padding: 2%; font-weight: 500;">{{home.ownerType}}: <span>{{home.sellerName}}</span><br/>
+          <span>Apartment Name: {{home.towerName}}</span>
+        </h3>
+        
+          <div *ngIf="home.images && home.images.length > 0; else noImages">
+            <div class="image-grid">
+              <div class="image-item" *ngFor="let image of home.images; let i = index">
+                <div class="image-box">
+                  <img [src]="'data:image/jpeg;base64,' + image.data" class="d-block w-100" alt="Image {{ i + 1 }}">
+                </div>
+              </div>
+            </div>
           </div>
-          
-        </div>
-        <div class="property-details">
-          <span style="font-weight: bold;">{{home.category}}</span>
-          <div class="grid-container">
-            <div class="grid-item"><i class="fas fa-building"></i>{{home.towerName}}</div>
-            <div class="grid-item"><i class="fa fa-address-card" aria-hidden="true"></i>{{home.address}}</div>
-            <div class="grid-item"><i class="fas fa-landmark"></i>{{home.landMark}}</div>
-            <div class="grid-item"><i class="fas fa-map-pin"></i>{{home.city}}</div>
-            <div class="grid-item"><i class="fas fa-ruler"></i>{{home.carpetArea}}sqft</div>
-            <div class="grid-item"><i class="fas fa-bed"></i>{{home.bhk}} BHK</div>
-            <div class="grid-item"><i class="fas fa-couch"></i>{{home.furnished}}</div>
-            <div class="grid-item"><i class="fas fa-building"></i>{{home.floorNo}} Out Of {{home.totalFloors}} floor</div>
-            <div class="grid-item"><i class="fas fa-car"></i>Parking {{home.parking}}</div>
-            <div class="grid-item"><i class="fas fa-phone"></i>{{home.phoneNo}}</div>
+          <ng-template #noImages>
+            <p>No images found for seller {{home.sellerName}}</p>
+          </ng-template>
+        
+        <div class="property-info">
+          <div class="property-price">
+            <span>₹ {{home.price}}/monthly</span>
+            <div class="example-button-container">
+              <button mat-fab [class.liked]="isLiked" aria-label="Example icon button with a heart icon" (click)="toggleLike(home)">
+                <mat-icon>{{ isLiked ? 'favorite' : 'favorite_border' }}</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="property-details">
+            <span style="font-weight: bold;">{{home.category}}</span>
+            <div class="grid-container">
+              <div class="grid-item"><i class="fas fa-building"></i>{{home.towerName}}</div>
+              <div class="grid-item"><i class="fa fa-address-card" aria-hidden="true"></i>{{home.address}}</div>
+              <div class="grid-item"><i class="fas fa-landmark"></i>{{home.landMark}}</div>
+              <div class="grid-item"><i class="fas fa-landmark"></i>{{home.town}}</div>
+              <div class="grid-item"><i class="fas fa-map-pin"></i>{{home.city}}</div>
+              <div class="grid-item"><i class="fas fa-ruler"></i>{{home.carpetArea}}sqft</div>
+              <div class="grid-item"><i class="fas fa-bed"></i>{{home.bhk}} BHK</div>
+              <div class="grid-item"><i class="fas fa-couch"></i>{{home.furnished}}</div>
+              <div class="grid-item"><i class="fas fa-building"></i>{{home.floorNo}} Out Of {{home.totalFloors}} floor</div>
+              <div class="grid-item"><i class="fas fa-car"></i>Parking {{home.parking}}</div>
+              <div class="grid-item"><i class="fas fa-phone"></i>{{home.phoneNo}}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </li>
-</ul>
+    </li>
+  </ul>
 </div>
 

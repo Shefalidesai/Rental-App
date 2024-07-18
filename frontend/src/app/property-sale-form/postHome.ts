@@ -16,5 +16,5 @@ interface postHome{
     phoneNo:number;
     category:string;
     construction:string;
-    images: File[];
+    
 }

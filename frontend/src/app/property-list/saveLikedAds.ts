@@ -1,11 +1,11 @@
 interface saveLikedAds{
   id?: number;
-  user_id:number;
   sellerName: string;
   towerName: string;
   price: number;
   address: string;
   landMark:string;
+  town:string;
   carpetArea: number;
   bhk: number;
   furnished: string;

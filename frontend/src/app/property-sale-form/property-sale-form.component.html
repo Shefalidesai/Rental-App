@@ -5,6 +5,12 @@
   <h2>Post Property</h2>
   <div class="row">
     <div class="col-md-6" class="form-box">
+      <mat-card>
+        <div class="container" >
+          <h2>Upload Images</h2>
+          <input type="file" (change)="onFileSelected($event)" multiple />
+          <button mat-raised-button color="primary" type="submit" (click)="onUpload()">Upload</button>
+        </div></mat-card>
       <form [formGroup]="saleForm" (ngSubmit)="onSubmit()">
         <mat-card>
           <mat-form-field class="full-width" appearance="fill">
@@ -102,18 +108,13 @@
               <input matInput type="text" formControlName="phoneNo" name="contactNumber">
             </div>
           </mat-form-field>
-         
           <button mat-raised-button color="primary" type="submit">Submit</button>
         </mat-card>
       </form>
+      
       <app-message-box [showMessage]="showMessage" [message]="message"></app-message-box>
     </div>
-    <div class="container">
-      <h2>Upload Images</h2>
-      <input type="file" (change)="onFileSelected($event)" multiple />
-      <button (click)="onUpload()">Upload</button> 
-      <p>{{ message }}</p>
-    </div>
+   
   </div>
 </div>
 
