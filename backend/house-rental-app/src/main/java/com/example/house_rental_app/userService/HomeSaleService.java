@@ -54,6 +54,10 @@ public class HomeSaleService {
             return homeSaleRepo.save(homeSale);
         }
 
+        public List<HomeSale> getSellerName(String sellerName){
+            return homeSaleRepo.findBySellerName(sellerName);
+        }
+
         public void deleteHomeSale(Long id) {
             homeSaleRepo.deleteById(id);
         }

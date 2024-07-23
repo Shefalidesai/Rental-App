@@ -4,7 +4,6 @@ import { PropertySaleFormComponent } from './property-sale-form/property-sale-fo
 import { PropertyListComponent } from './property-list/property-list.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { WelcomeContentComponent } from './welcome-content/welcome-content.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ContentComponent } from './content/content.component';
 import { NewConstructionComponent } from './new-construction/new-construction.component';
@@ -19,7 +18,7 @@ const routes: Routes = [
   {path:'login', component:ContentComponent},
   {path:'new-property', component:NewConstructionComponent},
   {path:'saved-ads',component:SavedAdsComponent},
-  {path:'', redirectTo:'dashboard', pathMatch:'full'}
+ 
  ];
 
 @NgModule({

@@ -33,8 +33,7 @@ export class ContentComponent implements OnInit {
     this.componentToShow = componentToShow;
   }
 
-  ngOnInit(): void {
-	  
+  ngOnInit(): void {  
   }
   
   
@@ -96,6 +95,7 @@ export class ContentComponent implements OnInit {
 		  this.axiosService.setAuthToken(response.data.token);
 		//   this.firstName = response.data.firstName;
 	
+		this.loginservice.setLogin(input.login);
 		  // Displaying the registration success message
 		  this.message = 'Registration successful!';
 		  this.showMessage = true;

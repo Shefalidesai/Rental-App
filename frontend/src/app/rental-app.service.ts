@@ -18,8 +18,8 @@ export class RentalAppService {
   private uploadImg= 'http://localhost:8080/api/images';
   private apiUrl='http://localhost:8080/login/save';
 
-  getHomeSales(endpoint: string = ''):Observable<HomeSales[]>{
-    return this.http.get<HomeSales[]>(`${this.baseUrl}${endpoint}`);
+  getHomeSell(endpoint: string = ''):Observable<HomeSell[]>{
+    return this.http.get<HomeSell[]>(`${this.baseUrl}${endpoint}`);
   }
 
   postHomeSale(formValues:any): Observable<any> {
@@ -55,9 +55,24 @@ export class RentalAppService {
     return this.http.post<any>(url, data, { headers });
    }
 
-   getsavedAds(login:any):Observable<HomeSales[]>{
+   getsavedAds(login:any):Observable<HomeSell[]>{
     const url=`http://localhost:8080/login/savedAds?login=${login}`;
-    return this.http.get<HomeSales[]>(url);
+    return this.http.get<HomeSell[]>(url);
+  }
+
+  saveMyAds(data:any, login:any ):Observable<saveLikedAds[]>{
+    console.log(login,"-login");
+    const url = `http://localhost:8080/login/saveMyAds?login=${login}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(url, data, { headers });
+   }
+
+
+  getMyAds(login:any):Observable<HomeSell[]>{
+    const url=`http://localhost:8080/login/getMyAds?login=${login}`;
+    return this.http.get<HomeSell[]>(url);
   }
 
   uploadImages(files: File[], sellerName: any): Observable<HttpResponse<any>> {

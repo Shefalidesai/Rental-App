@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { WelcomeContentComponent } from './welcome-content/welcome-content.component';
 import { AuthContentComponent } from './auth-content/auth-content.component';
 import { ContentComponent } from './content/content.component';
 
@@ -26,6 +25,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
 import { SilderComponent } from './silder/silder.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RentalAppService } from './rental-app.service';
@@ -34,6 +34,9 @@ import { SellPropertyListComponent } from './sell-property-list/sell-property-li
 import { NewConstructionComponent } from './new-construction/new-construction.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { SavedAdsComponent } from './saved-ads/saved-ads.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { MyPostComponent } from './my-post/my-post.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,6 @@ import { SavedAdsComponent } from './saved-ads/saved-ads.component';
     ButtonsComponent,
     HeaderComponent,
     LoginFormComponent,
-    WelcomeContentComponent,
     AuthContentComponent,
     ContentComponent,
     HomepageComponent,
@@ -53,7 +55,8 @@ import { SavedAdsComponent } from './saved-ads/saved-ads.component';
     SellPropertyListComponent,
     NewConstructionComponent,
     MessageBoxComponent,
-    SavedAdsComponent
+    SavedAdsComponent,
+    MyPostComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -71,7 +74,10 @@ import { SavedAdsComponent } from './saved-ads/saved-ads.component';
     MatSelectModule,
     MatFormFieldModule,
     MatToolbarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatMenuModule,
+    MatGridListModule,
+    MatTabsModule
   
   ],
   providers: [AxiosService,RentalAppService],

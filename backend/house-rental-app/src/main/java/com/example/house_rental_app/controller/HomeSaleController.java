@@ -26,13 +26,18 @@ public class HomeSaleController {
         return homeSaleService.getSaleId(id);
     }
 
-    // new/old construction
+
+    @GetMapping("/sellerName/{sellerName}")
+    public List<HomeSale> getAdByLogin(@PathVariable String sellerName){
+       return homeSaleService.getSellerName(sellerName);
+    }
+
     @GetMapping("/construction/{construction}")
     public List<HomeSale> getHomeSaleByConstruction(@PathVariable String construction) {
         return homeSaleService.getByConstruction(construction);
     }
 
-    //buy/rent/pg/commercial
+    
     @GetMapping("/category/{category}")
     public List<HomeSale> getHomeSaleByCategory(@PathVariable String category){
         return homeSaleService.getByCategory(category);

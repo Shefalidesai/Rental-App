@@ -1,3 +1,4 @@
+/* General property card styling */
 .property-card {
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -34,61 +35,72 @@
   font-weight: bold;
 }
 
-.favorite-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.5em;
-  color: #e74c3c;
-}
-
-.favorite-btn:hover {
-  color: #c0392b;
-}
-
 .property-details span {
   display: block;
   margin-bottom: 4px;
   color: #777;
 }
-/* app.component.css */
+
+/* Button container styles */
+.example-button-container button {
+  background-color: rgb(255, 255, 255);
+  color: black; /* Default color */
+}
+
+.example-button-container button.liked {
+  background-color: red; /* Change to red when liked */
+}
+
+.example-button-container button.mat-fab {
+  color: white; /* Ensure icon color is visible */
+}
+
+/* Grid container and item styles */
 .property-list {
-  display: flexbox;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   padding: 16px;
 }
+
 .grid-container {
   display: grid;
-  gap: 30px 30px;
-  grid-template-columns: auto auto auto;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   background-color: #fcfcfc;
   padding: 10px;
 }
 
 .grid-item {
   background-color: rgba(255, 255, 255, 0.8);
- 
   padding: 20px;
   font-size: 15px;
   text-align: center;
 }
-.grid-item i{
+
+.grid-item i {
   padding: 5px;
 }
+.grid-items img {
+  vertical-align: middle;
+  margin-right: 5px;
+}
 
-
+/* Navigation styles */
 .center-nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color:rgb(155, 201, 253);
+  background-color: rgb(245, 245, 245);
+  margin: 1%;
+  border: 1px solid rgb(236, 236, 236);
+  border-radius: 50px; /* Semi-circular corners */
 }
 
 .nav-buttons {
   display: flex;
   gap: 10px;
-  margin: 20px;
+  margin: 10px;
 }
 
 .nav-button.active {
@@ -96,32 +108,49 @@
   color: white;
 }
 
-mat-form-field {
-  width: 50%;
-  margin: 10px;
-}
-
-
-.nav-buttons {
+/* Image grid styles */
+.image-grid {
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px; /* Gap between images */
 }
 
-.nav-button {
-  background-color: transparent;
-  border: 1px solid white;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 20px;
-  margin: 0 10px;
-  transition: background-color 0.3s, color 0.3s;
+.image-item {
+  flex: 1 1 calc(33.333% - 10px); /* Three images per row */
+  box-sizing: border-box;
 }
 
-.nav-button.active,
-.nav-button:hover {
-  background-color: white;
-  color: #5f2dc4;
+.image-box {
+  padding: 10px;
+  text-align: center; /* Center content */
 }
 
+.image-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.image-caption {
+  margin-top: 5px;
+}
+
+/* Mat button and menu styles */
+button.mat-button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: grey; /* Sets the text and icon color to grey */
+}
+
+button.mat-button i {
+  margin-right: 8px; /* Spacing between icon and text */
+}
+
+.mat-menu-item {
+  color: grey; /* Sets the text and icon color to grey */
+}
+
+.mat-menu-item i {
+  margin-right: 8px; /* Spacing between icon and text */
+}

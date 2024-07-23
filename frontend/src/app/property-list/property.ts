@@ -1,4 +1,4 @@
-interface HomeSales {
+interface HomeSell {
   id?: number;
   sellerName: string;
   towerName: string;

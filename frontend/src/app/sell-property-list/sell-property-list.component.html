@@ -1,41 +1,92 @@
 <div class="center-nav">
-  <div class="nav-buttons">
-    <mat-form-field appearance="fill">
-      <mat-label>BHK</mat-label>
-      <mat-select [(ngModel)]="selectedBhk" (selectionChange)="onBhkChange()">
-        <mat-option [value]="1">1 BHK</mat-option>
-        <mat-option [value]="2">2 BHK</mat-option>
-        <mat-option [value]="3">3 BHK</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <!-- <div class="nav-buttons">
+    <button mat-button class="nav-button" [class.active]="selectedButton === 'Rent'" (click)="selectButton('Rent')">Rent</button>
+    <button mat-button class="nav-button" [class.active]="selectedButton === 'Commercial'" (click)="selectButton('Commercial')">Commercial</button>
+    <button mat-button class="nav-button" [class.active]="selectedButton === 'PG'" (click)="selectButton('PG')">PG</button>
+    </div> -->
 
-    <mat-form-field appearance="fill">
-      <mat-label>Furnishing</mat-label>
-      <mat-select [(ngModel)]="furnishing" (selectionChange)="onFurnishingChange()">
-        <mat-option value="SemiFurnished">Semi Furnished</mat-option>
-        <mat-option value="UnFurnished">Unfurnished</mat-option>
-        <mat-option value="FullyFurnished">Fully Furnished</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Parking</mat-label>
-      <mat-select [(ngModel)]="parking" (selectionChange)="onParkingChange()">
-        <mat-option value="Available">Available</mat-option>
-        <mat-option value="NotAvailable">Not Available</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>City</mat-label>
-      <mat-select [(ngModel)]="city" (selectionChange)="onCityChange()">
-        <mat-option value="Mumbai">Mumbai</mat-option>
-        <mat-option value="Delhi">Delhi</mat-option>
-        <mat-option value="Bangalore">Bangalore</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+    <div class="nav-buttons">
+      <button mat-button [matMenuTriggerFor]="bhkMenu" class="menu-button">
+        <i class="fas fa-home"></i> BHK
+        <i class="fas fa-chevron-down arrow-icon"></i>
+      </button>
+      <mat-menu #bhkMenu="matMenu">
+        <button mat-menu-item (click)="onBhkChange(1)" class="menu-item">
+          <i class="fas fa-home"></i> 1 BHK
+        </button>
+        <button mat-menu-item (click)="onBhkChange(2)" class="menu-item">
+          <i class="fas fa-building"></i> 2 BHK
+        </button>
+        <button mat-menu-item (click)="onBhkChange(3)" class="menu-item">
+          <i class="fas fa-home"></i> 3 BHK
+        </button>
+      </mat-menu>
+      
+  
+      <button mat-button [matMenuTriggerFor]="furnishingMenu"><i class="fa fa-couch"></i> Furnishing
+        <i class="fas fa-chevron-down arrow-icon"></i></button>
+  <mat-menu #furnishingMenu="matMenu">
+    <button mat-menu-item (click)="onFurnishingChange('SemiFurnished')"><i class="fa fa-couch"></i> Semi Furnished</button>
+    <button mat-menu-item (click)="onFurnishingChange('UnFurnished')"><i class="fa fa-bed"></i> Unfurnished</button>
+    <button mat-menu-item (click)="onFurnishingChange('FullyFurnished')"><i class="fa fa-tv"></i> Fully Furnished</button>
+  </mat-menu>
+  
+  <button mat-button [matMenuTriggerFor]="parkingMenu"><i class="fa fa-car"></i> Parking <i class="fas fa-chevron-down arrow-icon"></i></button>
+  <mat-menu #parkingMenu="matMenu">
+    <button mat-menu-item (click)=" onParkingChange('Available')"><i class="fa fa-car"></i> Available</button>
+    <button mat-menu-item (click)=" onParkingChange('NotAvailable')"><i class="fa fa-ban"></i> Not Available</button>
+  </mat-menu>
+  
+  <button mat-button [matMenuTriggerFor]="cityMenu">
+    <i class="fa fa-city"></i> City <i class="fas fa-chevron-down arrow-icon"></i>
+  </button>
+  <mat-menu #cityMenu="matMenu">
+    <!-- Mumbai Submenu -->
+    <button mat-menu-item [matMenuTriggerFor]="mumbaiMenu">
+      <i class="fa fa-building"></i> Mumbai
+    </button>
+    <mat-menu #mumbaiMenu="matMenu">
+      <button mat-menu-item (click)="onCityChange('Navi Mumbai')">Navi Mumbai</button>
+      <button mat-menu-item (click)="onCityChange('Thane')">Thane</button>
+      <button mat-menu-item (click)="onCityChange('Mumbai')">Mumbai City</button>
+    </mat-menu>
+  
+    <!-- Gujarat Submenu -->
+    <button mat-menu-item [matMenuTriggerFor]="gujaratMenu">
+      <i class="fa fa-warehouse"></i> Gujarat
+    </button>
+    <mat-menu #gujaratMenu="matMenu">
+      <button mat-menu-item (click)="onCityChange('Surat')">Surat</button>
+      <button mat-menu-item (click)="onCityChange('Ahmedabad')">Ahmedabad</button>
+    </mat-menu>
+  
+    <!-- Delhi Submenu -->
+    <button mat-menu-item [matMenuTriggerFor]="delhiMenu">
+      <i class="fa fa-landmark"></i> Delhi
+    </button>
+    <mat-menu #delhiMenu="matMenu">
+      <button mat-menu-item (click)="onCityChange('Noida')">Noida</button>
+    </mat-menu>
+  
+    <!-- Bangalore -->
+    <button mat-menu-item (click)="onCityChange('Bangalore')">
+      <i class="fa fa-industry"></i> Bangalore
+    </button>
+  
+    <!-- Chennai -->
+    <button mat-menu-item (click)="onCityChange('Chennai')">
+      <i class="fa fa-street-view"></i> Chennai
+    </button>
+  </mat-menu>
+  
+  
+  
+      
+      
+    </div>
 </div>
+
+
 <div>
   <ul style="list-style-type: none;">
     <li *ngFor="let home of homes">
@@ -43,26 +94,45 @@
         <h3 style="padding: 2%; font-weight: 500;">{{home.ownerType}}: <span>{{home.sellerName}}</span><br/>
           <span>Apartment Name: {{home.towerName}}</span>
         </h3>
-        <img src="assets/image/img1.jpg" alt="Property Image" class="property-image">
+        
+          <div *ngIf="home.images && home.images.length > 0; else noImages">
+            <div class="image-grid">
+              <div class="image-item" *ngFor="let image of home.images; let i = index">
+                <div class="image-box">
+                  <img [src]="'data:image/jpeg;base64,' + image.data" class="d-block w-100" alt="Image {{ i + 1 }}">
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template #noImages>
+            <p>No images found for seller {{home.sellerName}}</p>
+          </ng-template>
+        
         <div class="property-info">
           <div class="property-price">
-            <span >₹ {{home.price}}</span>
-            <button class="favorite-btn">
-              <i class="fa fa-heart-o" aria-hidden="true"></i>
-            </button>
+            <span>₹ {{home.price}}/monthly</span>
+            <div class="example-button-container">
+              <button mat-fab [class.liked]="isLiked" aria-label="Example icon button with a heart icon" (click)="toggleLike(home)">
+                <mat-icon>{{ isLiked ? 'favorite' : 'favorite_border' }}</mat-icon>
+              </button>
+            </div>
           </div>
           <div class="property-details">
             <span style="font-weight: bold;">{{home.category}}</span>
             <div class="grid-container">
               <div class="grid-item"><i class="fas fa-building"></i>{{home.towerName}}</div>
-              <div class="grid-item"><i class="fa fa-address-card" aria-hidden="true"></i>{{home.address}}</div>
+              <div class="grid-item">  <img src="assets/images/address.png" alt="Carpet Area Icon" style="width: 24px; height: 24px;"> {{home.address}}</div>
               <div class="grid-item"><i class="fas fa-landmark"></i>{{home.landMark}}</div>
-              <div class="grid-item"><i class="fas fa-map-pin"></i>{{home.city}}</div>
-              <div class="grid-item"><i class="fas fa-ruler"></i>{{home.carpetArea}} sqft</div>
+              <div class="grid-item"> <img src="assets/images/cityscape.png" alt="Carpet Area Icon" style="width: 24px; height: 24px;"> {{home.town}}</div>
+              <div class="grid-item"><img src="assets/images/management.png" alt="Carpet Area Icon" style="width: 24px; height: 24px;"> {{home.city}}</div>
+              <div class="grid-item"><div class="grid-items">
+                <img src="assets/images/area-graph.png" alt="Carpet Area Icon" style="width: 24px; height: 24px;">
+                {{home.carpetArea}} sqft
+              </div></div>
               <div class="grid-item"><i class="fas fa-bed"></i>{{home.bhk}} BHK</div>
               <div class="grid-item"><i class="fas fa-couch"></i>{{home.furnished}}</div>
-              <div class="grid-item"><i class="fas fa-building"></i>{{home.floorNo}} Out of {{home.totalFloors}}</div>
-              <div class="grid-item"><i class="fas fa-car"></i>Parking - {{home.parking}}</div>
+              <div class="grid-item"><i class="fas fa-building"></i>{{home.floorNo}} Out Of {{home.totalFloors}} floor</div>
+              <div class="grid-item"><i class="fas fa-car"></i>Parking {{home.parking}}</div>
               <div class="grid-item"><i class="fas fa-phone"></i>{{home.phoneNo}}</div>
             </div>
           </div>
@@ -72,4 +142,3 @@
   </ul>
 </div>
 
-  

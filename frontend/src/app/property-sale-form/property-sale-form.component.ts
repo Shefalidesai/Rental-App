@@ -3,6 +3,9 @@ import { RentalAppService } from '../rental-app.service';
 import './postHome';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { GetLoginService } from '../get-login.service';
 
 @Component({
   selector: 'app-property-sale-form',
@@ -16,9 +19,11 @@ export class PropertySaleFormComponent implements OnInit  {
   postHomeSale!:postHome[];
   selectedFiles!: File[];
   message1: string = '';
+  loginName!:string|null;
  
 
-  constructor(private service:RentalAppService, private fb: FormBuilder,private http: HttpClient){
+  constructor(private service:RentalAppService, private router:Router, private getLogin:GetLoginService
+    , private fb: FormBuilder,private http: HttpClient){
    
   }
   
@@ -43,7 +48,16 @@ export class PropertySaleFormComponent implements OnInit  {
       construction:['']
       
     }); 
+
+    this.getLogin.getLogin().subscribe(login => {
+      this.loginName=login
+      if (!login) {
+        this.router.navigate(['/login']);
+      }
+    });
+   
   }
+
   
   onSubmit(): void {
     if (this.saleForm.valid) {
@@ -63,6 +77,12 @@ export class PropertySaleFormComponent implements OnInit  {
           this.message = 'Failed to post property.';
         }
       );
+
+      this.service.saveMyAds(formValues,this.loginName).subscribe(
+        response => {console.log('Response from second URL:', response);},
+        error=>{console.log(error);
+        }
+      )
     }
   }
 
@@ -96,4 +116,6 @@ export class PropertySaleFormComponent implements OnInit  {
         }
       );
     }
+
+    
 }

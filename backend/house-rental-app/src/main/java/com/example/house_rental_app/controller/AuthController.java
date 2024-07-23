@@ -1,10 +1,8 @@
 package com.example.house_rental_app.controller;
 
 import com.example.house_rental_app.config.UserAuthProvider;
-import com.example.house_rental_app.dto.CredentialsDto;
-import com.example.house_rental_app.dto.SavedAdsDTO;
-import com.example.house_rental_app.dto.SignUpDto;
-import com.example.house_rental_app.dto.UserDTO;
+import com.example.house_rental_app.dto.*;
+import com.example.house_rental_app.userService.MyAdsService;
 import com.example.house_rental_app.userService.SavedAdsService;
 import com.example.house_rental_app.userService.UserService;
 import jakarta.validation.Valid;
@@ -23,6 +21,7 @@ public class AuthController {
     private final UserService userService;
     private final UserAuthProvider userAuthProvider;
     private final SavedAdsService savedAdsService;
+    private final MyAdsService myAdsService;
 
     @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody @Valid CredentialsDto credentialsDto) {
@@ -63,5 +62,17 @@ public class AuthController {
     public ResponseEntity<List<SavedAdsDTO>> getSavedAds(@RequestParam String login) {
         List<SavedAdsDTO> savedAdsList = savedAdsService.getsavedLike(login);
         return ResponseEntity.ok(savedAdsList);
+    }
+
+    @PostMapping("/login/saveMyAds")
+    public ResponseEntity<MyAdsDTO> saveMyAds(@RequestBody MyAdsDTO myAdsDTO, @RequestParam String login) {
+        MyAdsDTO myAdsDTO1=myAdsService.myAds(myAdsDTO,login);
+        return ResponseEntity.ok(myAdsDTO1);
+    }
+
+    @GetMapping("/login/getMyAds")
+    public ResponseEntity<List<MyAdsDTO>> getMyAds(@RequestParam String login) {
+        List<MyAdsDTO> myAdsDTOList = myAdsService.getMyAds(login);
+        return ResponseEntity.ok(myAdsDTOList);
     }
 }

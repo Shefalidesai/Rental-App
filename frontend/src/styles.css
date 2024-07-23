@@ -1,16 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-*{
-  font-family: "Bona Nova SC", serif;
-}
+
 @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap');
 html, body { height: 100%; }
-body { margin: 0;
-
-        font-family: "Bona Nova SC", serif;
-        
-        font-style: normal;
-      }
+body {  
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
       
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

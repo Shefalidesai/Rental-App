@@ -27,12 +27,13 @@ public class SecurityConfig extends WebConfig {
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, "/login","/register").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/homes/**","/login/savedAds").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/homes/**","/login/savedAds","/login/getMyAds").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/images/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/firstName/**","/api/images/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/login/{login}/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"/login/save").permitAll()
                         .requestMatchers(HttpMethod.POST, "/homes/saveAd").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login/saveMyAds").permitAll()
                         .anyRequest().authenticated())
         ;
         return http.build();

@@ -11,7 +11,8 @@ import { firstValueFrom } from 'rxjs';
 })
 export class SavedAdsComponent implements OnInit {
 
-  homes:HomeSales[] = [];
+  homes:HomeSell[] = [];
+  postedHomes:HomeSell[]=[];
   login:string|null=null;
   images: any[] = [];
 
@@ -19,6 +20,7 @@ export class SavedAdsComponent implements OnInit {
 
   ngOnInit(): void {
   this.getHomes();
+  this.getPostedAds();
 }
 
 async getHomes(): Promise<void> {
@@ -31,6 +33,26 @@ const data = await firstValueFrom( this.service.getsavedAds(this.login))
       this.homes=data;
      // Fetch images for each home
     for (let home of this.homes) {
+      const imagesData = await firstValueFrom(this.service.getImages(home.sellerName));
+      home.images = imagesData;
+    }
+    
+  } catch (error) {
+    console.error('Error fetching data', error);
+  }
+
+}
+
+async getPostedAds():Promise<void>{
+  this.getLogin.getLogin().subscribe(login=>{
+    this.login=login
+})
+
+try {
+const data = await firstValueFrom(this.service.getMyAds(this.login))
+      this.postedHomes=data;
+     // Fetch images for each home
+    for (let home of this.postedHomes) {
       const imagesData = await firstValueFrom(this.service.getImages(home.sellerName));
       home.images = imagesData;
     }

@@ -14,4 +14,5 @@ public interface HomeSaleRepo extends JpaRepository<HomeSale, Long> {
     List<HomeSale> findByParking(String parking);
     List<HomeSale> findByBhk(Integer bhk);
     List<HomeSale> findByFurnished(String furnished);
+    List<HomeSale> findBySellerName(String sellerName);
 }

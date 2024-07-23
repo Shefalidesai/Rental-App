@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RentalAppService } from '../rental-app.service';
+import { GetLoginService } from '../get-login.service';
+import { catchError, firstValueFrom, forkJoin, map, mergeMap, of } from 'rxjs';
 
 @Component({
   selector: 'app-new-construction',
@@ -8,64 +10,116 @@ import { RentalAppService } from '../rental-app.service';
   styleUrls: ['./new-construction.component.css']
 })
 export class NewConstructionComponent  implements OnInit {
+  selectedButton: string = 'Buy';
+  selectedBhk!: number;
+  furnishing: string = '';
+  parking: string = '';
+  city: string = '';
+  homes: HomeSell[] = [];
+  login: string | null = null;
+  isLiked: boolean = false;
 
-  homes:HomeSales[] = [];
-
-  constructor(private service:RentalAppService, private http: HttpClient) { }
+  constructor(
+    private service: RentalAppService,
+    private http: HttpClient,
+    private loginservice: GetLoginService
+  ) {}
 
   ngOnInit(): void {
     this.getHomeSale();
-    // this.fetchHomes();
-   }
-
-  getHomeSale():void{
-    this.service.getHomeSales('/construction/New').subscribe((data:HomeSales[])=>{
-      this.homes=data;
-      console.log(data);
-      
-    })
+    this.loginservice.getLogin().subscribe((login) => {
+      this.login = login;
+    });
   }
 
-  // selectedButton: string = 'Buy';
-  // bhk: string = '1';
-  // furnishing: string = 'semi';
-  // parking: string = 'yes';
-  // searchQuery: string = '';
-  // filteredHomes: any[] = [];
+  toggleLike(home: HomeSell) {
+    this.homes.forEach((h) => (h.isLiked = false));
+    home.isLiked = !home.isLiked;
+    if (home.isLiked) {
+      this.saveLikeAds(home);
+    }
+  }
+
+  async getHomeSale(): Promise<void> {
+    try {
+      const data = await firstValueFrom(this.service.getHomeSell('/construction/New'));
+      this.homes = data;
+      await this.fetchImagesForHomes();
+      console.log(this.homes);
+    } catch (error) {
+      console.error('Error fetching data', error);
+    }
+  }
+
+  fetchImagesForHomes(): Promise<void> {
+    const imageObservables = this.homes.map((home) =>
+      this.service.getImages(home.sellerName).pipe(
+        map((imagesData) => {
+          home.images = imagesData;
+          return home;
+        }),
+        catchError((error) => {
+          console.error(`Error fetching images for ${home.sellerName}`, error);
+          return of(home); // Return the home without images in case of error
+        })
+      )
+    );
+    return firstValueFrom(forkJoin(imageObservables)).then(() => {});
+  }
 
 
-  // selectButton(button: string) {
-  //   this.selectedButton = button;
-  //   this.filterHomes();
-  // }
 
-  // fetchHomes() {
-  //   // Fetch homes from the API
-  //   this.service.getHomeSales().subscribe((data:HomeSales[])=>{
-  //     this.homes=data;
-  //     this.filterHomes();
-  //     console.log(data);
-  //   })
-  // }
+  onBhkChange(input: number) {
+    this.fetchHomesWithImages('/bhk/' + input);
+  }
 
-  // filterHomes() {
-  //   this.filteredHomes = this.homes.filter(home =>
-  //     home.bhk == this.bhk &&
-  //     home.furnished == this.furnishing &&
-  //     home.parking == this.parking
-  //   );
-  // }
+  onFurnishingChange(input: string) {
+    this.fetchHomesWithImages('/furnished/' + input);
+  }
 
-  // search() {
-  //   const searchParams = {
-  //     selectedCategory: this.selectedButton,
-  //     bhk: this.bhk,
-  //     furnishing: this.furnishing,
-  //     parking: this.parking,
-  //     query: this.searchQuery
-  //   };
+  onParkingChange(input: string) {
+    this.fetchHomesWithImages('/parking/' + input);
+  }
 
-  //   console.log('Search Params:', searchParams);
-  //   // Perform the search or handle the search parameters as needed
-  // }
+  onCityChange(input: string) {
+    this.fetchHomesWithImages('/city/' + input);
+  }
+
+  fetchHomesWithImages(url: string) {
+    this.service.getHomeSell(url).pipe(
+      mergeMap((homes: HomeSell[]) => {
+        this.homes = homes;
+        return this.fetchImagesForHomes();
+      })
+    ).subscribe();
+  }
+
+  async saveLikeAds(ad: saveLikedAds) {
+    try {
+      const postData = {
+        sellerName: ad.sellerName,
+        towerName: ad.towerName,
+        price: ad.price,
+        address: ad.address,
+        landMark: ad.landMark,
+        carpetArea: ad.carpetArea,
+        bhk: ad.bhk,
+        town: ad.towerName,
+        furnished: ad.furnished,
+        ownerType: ad.ownerType,
+        city: ad.city,
+        floorNo: ad.floorNo,
+        totalFloors: ad.totalFloors,
+        parking: ad.parking,
+        phoneNo: ad.phoneNo,
+        category: ad.category,
+        construction: ad.construction,
+      };
+
+      const savedAdData = await firstValueFrom(this.service.saveLikedAds(postData, this.login));
+      console.log(savedAdData);
+    } catch (error) {
+      console.error('Error saving ad', error);
+    }
+  }
 }
