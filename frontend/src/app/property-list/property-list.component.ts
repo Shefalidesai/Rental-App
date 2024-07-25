@@ -4,7 +4,7 @@ import { RentalAppService } from '../rental-app.service';
 import { HttpClient } from '@angular/common/http';
 import './saveLikedAds';
 import { firstValueFrom, forkJoin, of } from 'rxjs';
-import { mergeMap, map, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { GetLoginService } from '../get-login.service';
 
 @Component({
@@ -19,8 +19,11 @@ export class PropertyListComponent implements OnInit {
   parking: string = '';
   city: string = '';
   homes: HomeSell[] = [];
+  filteredHomes: HomeSell[] = [];
   login: string | null = null;
   isLiked: boolean = false;
+  showMessage: boolean = false;
+  message: string = '';
 
   constructor(
     private service: RentalAppService,
@@ -33,13 +36,14 @@ export class PropertyListComponent implements OnInit {
     this.loginservice.getLogin().subscribe((login) => {
       this.login = login;
     });
-    
   }
 
   toggleLike(home: HomeSell) {
     this.homes.forEach((h) => (h.isLiked = false));
     home.isLiked = !home.isLiked;
     if (home.isLiked) {
+      this.showMessage = true;
+      this.message = 'Property saved successfully!';
       this.saveLikeAds(home);
     }
   }
@@ -48,6 +52,7 @@ export class PropertyListComponent implements OnInit {
     try {
       const data = await firstValueFrom(this.service.getHomeSell('/category/Rent'));
       this.homes = data;
+      this.filteredHomes = data; // Initialize filteredHomes with full list
       await this.fetchImagesForHomes();
       console.log(this.homes);
     } catch (error) {
@@ -76,43 +81,44 @@ export class PropertyListComponent implements OnInit {
     let url = '/category/' + input;
     if (input === 'PG') {
       url = '/category/PG';
+    } else if (input === 'Rent') {
+      url = '/category/Rent';
+    } else {
+      url = '/category/Commercial';
     }
-    else if(input==='Rent'){
-      url='/category/Rent';
-    }else{
-      url='/category/Commerical'
-    }
-    this.service.getHomeSell(url).pipe(
-      mergeMap((homes: HomeSell[]) => {
-        this.homes = homes;
-        return this.fetchImagesForHomes();
-      })
-    ).subscribe();
+    this.service.getHomeSell(url).subscribe((homes: HomeSell[]) => {
+      this.homes = homes;
+      this.filteredHomes = homes; // Reset filteredHomes
+      this.fetchImagesForHomes();
+    });
   }
 
   onBhkChange(input: number) {
-    this.fetchHomesWithImages('/bhk/' + input);
+    this.selectedBhk = input;
+    this.applyFilters();
   }
 
   onFurnishingChange(input: string) {
-    this.fetchHomesWithImages('/furnished/' + input);
+    this.furnishing = input;
+    this.applyFilters();
   }
 
   onParkingChange(input: string) {
-    this.fetchHomesWithImages('/parking/' + input);
+    this.parking = input;
+    this.applyFilters();
   }
 
   onCityChange(input: string) {
-    this.fetchHomesWithImages('/city/' + input);
+    this.city = input;
+    this.applyFilters();
   }
 
-  fetchHomesWithImages(url: string) {
-    this.service.getHomeSell(url).pipe(
-      mergeMap((homes: HomeSell[]) => {
-        this.homes = homes;
-        return this.fetchImagesForHomes();
-      })
-    ).subscribe();
+  applyFilters() {
+    this.filteredHomes = this.homes
+      .filter(home => !this.selectedBhk || home.bhk === this.selectedBhk) // Filter by BHK if selected
+      .filter(home => !this.furnishing || home.furnished === this.furnishing) // Filter by furnishing if selected
+      .filter(home => !this.parking || home.parking === this.parking) // Filter by parking if selected
+      .filter(home => !this.city || home.city === this.city); // Filter by city if selected
   }
 
   async saveLikeAds(ad: saveLikedAds) {

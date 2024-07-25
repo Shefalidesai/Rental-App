@@ -5,6 +5,7 @@ import com.example.house_rental_app.dto.*;
 import com.example.house_rental_app.userService.MyAdsService;
 import com.example.house_rental_app.userService.SavedAdsService;
 import com.example.house_rental_app.userService.UserService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class AuthController {
     private final SavedAdsService savedAdsService;
     private final MyAdsService myAdsService;
 
+    @Transactional
     @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody @Valid CredentialsDto credentialsDto) {
         UserDTO userDto = userService.login(credentialsDto);
@@ -30,6 +32,7 @@ public class AuthController {
         return ResponseEntity.ok(userDto);
     }
 
+    @Transactional
     @PostMapping("/register")
     public ResponseEntity<UserDTO> register(@RequestBody @Valid SignUpDto user) {
         UserDTO createdUser = userService.register(user);
@@ -52,6 +55,7 @@ public class AuthController {
         return ResponseEntity.ok( userService.getFirstNameById(login));
     }
 
+    @Transactional
     @PostMapping("/login/save")
     public ResponseEntity<SavedAdsDTO> saveLikeAds(@RequestBody SavedAdsDTO savedAdsDTO, @RequestParam String login) {
         SavedAdsDTO savedAdsDTO1=savedAdsService.saveLiked(savedAdsDTO,login);

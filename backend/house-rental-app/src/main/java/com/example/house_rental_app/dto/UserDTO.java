@@ -25,7 +25,7 @@ public class UserDTO {
     private String login;
     private String token;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<SavedAds> savedAds;
 
 

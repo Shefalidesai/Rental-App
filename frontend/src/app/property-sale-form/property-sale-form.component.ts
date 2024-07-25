@@ -69,7 +69,7 @@ export class PropertySaleFormComponent implements OnInit  {
           this.showMessage = true;
           this.message = 'Property posted successfully!';
           setTimeout(() => {
-            window.location.reload();
+            this.router.navigate(['/dashboard']);
           }, 2000);
         },
         error => {

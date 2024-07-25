@@ -14,6 +14,9 @@
         <button mat-menu-item (click)="onBhkChange(3)" class="menu-item">
           <i class="fas fa-home"></i> 3 BHK
         </button>
+        <button mat-menu-item (click)="onBhkChange(4)" class="menu-item">
+          <i class="fas fa-home"></i> 4 BHK
+        </button>
       </mat-menu>
       
   
@@ -22,13 +25,13 @@
     <mat-menu #furnishingMenu="matMenu">
       <button mat-menu-item (click)="onFurnishingChange('SemiFurnished')"><i class="fa fa-couch"></i> Semi Furnished</button>
       <button mat-menu-item (click)="onFurnishingChange('UnFurnished')"><i class="fa fa-bed"></i> Unfurnished</button>
-      <button mat-menu-item (click)="onFurnishingChange('FullyFurnished')"><i class="fa fa-tv"></i> Fully Furnished</button>
+      <button mat-menu-item (click)="onFurnishingChange('Fully Furnished')"><i class="fa fa-tv"></i> Fully Furnished</button>
     </mat-menu>
   
     <button mat-button [matMenuTriggerFor]="parkingMenu"><i class="fa fa-car"></i> Parking <i class="fas fa-chevron-down arrow-icon"></i></button>
     <mat-menu #parkingMenu="matMenu">
       <button mat-menu-item (click)=" onParkingChange('Available')"><i class="fa fa-car"></i> Available</button>
-      <button mat-menu-item (click)=" onParkingChange('NotAvailable')"><i class="fa fa-ban"></i> Not Available</button>
+      <button mat-menu-item (click)=" onParkingChange('Not Available')"><i class="fa fa-ban"></i> Not Available</button>
     </mat-menu>
   
   <button mat-button [matMenuTriggerFor]="cityMenu">
@@ -101,8 +104,13 @@
           <div class="property-price">
             <span>₹ {{home.price}}/monthly</span>
             <div class="example-button-container">
-              <button mat-fab [class.liked]="isLiked" aria-label="Example icon button with a heart icon" (click)="toggleLike(home)">
-                <mat-icon>{{ isLiked ? 'favorite' : 'favorite_border' }}</mat-icon>
+              <button
+                mat-fab
+                [ngClass]="{ 'liked': home.isLiked }"
+                aria-label="Example icon button with a heart icon"
+                (click)="toggleLike(home)"
+              >
+                <mat-icon>{{ home.isLiked ? 'favorite' : 'favorite_border' }}</mat-icon>
               </button>
             </div>
           </div>

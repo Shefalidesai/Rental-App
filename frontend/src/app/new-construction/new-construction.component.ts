@@ -18,6 +18,8 @@ export class NewConstructionComponent  implements OnInit {
   homes: HomeSell[] = [];
   login: string | null = null;
   isLiked: boolean = false;
+  showMessage: boolean = false;
+  message: string = '';
 
   constructor(
     private service: RentalAppService,
@@ -36,10 +38,11 @@ export class NewConstructionComponent  implements OnInit {
     this.homes.forEach((h) => (h.isLiked = false));
     home.isLiked = !home.isLiked;
     if (home.isLiked) {
+      this.showMessage = true;
+      this.message = 'Property saved successfully!';
       this.saveLikeAds(home);
     }
   }
-
   async getHomeSale(): Promise<void> {
     try {
       const data = await firstValueFrom(this.service.getHomeSell('/construction/New'));

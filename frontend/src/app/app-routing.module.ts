@@ -9,6 +9,7 @@ import { ContentComponent } from './content/content.component';
 import { NewConstructionComponent } from './new-construction/new-construction.component';
 import { SellPropertyListComponent } from './sell-property-list/sell-property-list.component';
 import { SavedAdsComponent } from './saved-ads/saved-ads.component';
+import { AuthContentComponent } from './auth-content/auth-content.component';
 
 const routes: Routes = [
   {path:'sales-form-app', component:PropertySaleFormComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'login', component:ContentComponent},
   {path:'new-property', component:NewConstructionComponent},
   {path:'saved-ads',component:SavedAdsComponent},
+  {path:'auth',component:AuthContentComponent}
  
  ];
 

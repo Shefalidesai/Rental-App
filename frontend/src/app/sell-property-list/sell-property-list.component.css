@@ -41,19 +41,19 @@
   color: #777;
 }
 
-/* Button container styles */
 .example-button-container button {
-  background-color: rgb(255, 255, 255);
-  color: black; /* Default color */
+  background-color: #000000; /* Default color */
+  transition: background-color 0.3s ease;
 }
 
 .example-button-container button.liked {
-  background-color: red; /* Change to red when liked */
+  background-color: #f44336; /* Color when liked */
 }
 
-.example-button-container button.mat-fab {
-  color: white; /* Ensure icon color is visible */
+.example-button-container button:hover {
+  opacity: 0.8; /* Slightly reduce opacity on hover */
 }
+
 
 /* Grid container and item styles */
 .property-list {

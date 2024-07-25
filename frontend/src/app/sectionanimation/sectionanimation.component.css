@@ -24,7 +24,7 @@
     box-shadow: -15px 15px 15px rgba(0, 0, 0, .2);
     opacity: 0;
     animation: zoomOut 1s ease forwards ;
-    animation-delay: 3.6s;
+    animation-delay: 4.6s;
   }
   
   .home-img .rhombus img{
@@ -34,8 +34,8 @@
     max-width: 450px; /*image widgth*/
     transform: rotate(45deg);
     opacity: 0;
-    animation: car 1s ease forwards ;
-    animation-delay: 4s;
+    animation: tower 1s ease forwards ;
+    animation-delay: 5s;
   }
   
   .home .rhombus2{
@@ -61,7 +61,7 @@
     }
   }
   
-  @keyframes car{
+  @keyframes tower{
     0%{
       transform: translate(300px,-300px) scale(0) rotate(-45deg);
       opacity: 0;

@@ -83,7 +83,7 @@ export class HeaderComponent implements OnInit {
   }
   onLogOut(){
     this.afterLogin=false;
-    this.router.navigate(['dashboard']);
+    this.router.navigate(['auth']);
   }
   savedAds(){
     this.router.navigate(['saved-ads']);

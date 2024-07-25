@@ -10,15 +10,18 @@ import './../property-list/property'
   templateUrl: './sell-property-list.component.html',
   styleUrls: ['./sell-property-list.component.css']
 })
-export class SellPropertyListComponent  implements OnInit {
-  selectedButton: string = 'Buy';
+export class SellPropertyListComponent implements OnInit {
+  selectedButton: string = 'Sell';  // Changed to 'Sell'
   selectedBhk!: number;
   furnishing: string = '';
   parking: string = '';
   city: string = '';
   homes: HomeSell[] = [];
+  filteredHomes: HomeSell[] = [];
   login: string | null = null;
   isLiked: boolean = false;
+  showMessage: boolean = false;
+  message: string = '';
 
   constructor(
     private service: RentalAppService,
@@ -37,6 +40,8 @@ export class SellPropertyListComponent  implements OnInit {
     this.homes.forEach((h) => (h.isLiked = false));
     home.isLiked = !home.isLiked;
     if (home.isLiked) {
+      this.showMessage = true;
+          this.message = 'Property saved successfully!';
       this.saveLikeAds(home);
     }
   }
@@ -45,6 +50,7 @@ export class SellPropertyListComponent  implements OnInit {
     try {
       const data = await firstValueFrom(this.service.getHomeSell('/category/Sell'));
       this.homes = data;
+      this.filteredHomes = data; // Initialize filteredHomes with full list
       await this.fetchImagesForHomes();
       console.log(this.homes);
     } catch (error) {
@@ -53,7 +59,7 @@ export class SellPropertyListComponent  implements OnInit {
   }
 
   fetchImagesForHomes(): Promise<void> {
-    const imageObservables = this.homes.map((home) =>
+    const imageObservables = this.filteredHomes.map((home) =>
       this.service.getImages(home.sellerName).pipe(
         map((imagesData) => {
           home.images = imagesData;
@@ -68,31 +74,33 @@ export class SellPropertyListComponent  implements OnInit {
     return firstValueFrom(forkJoin(imageObservables)).then(() => {});
   }
 
-
-
   onBhkChange(input: number) {
-    this.fetchHomesWithImages('/bhk/' + input);
+    this.selectedBhk = input;
+    this.applyFilters();
   }
 
   onFurnishingChange(input: string) {
-    this.fetchHomesWithImages('/furnished/' + input);
+    this.furnishing = input;
+    this.applyFilters();
   }
 
   onParkingChange(input: string) {
-    this.fetchHomesWithImages('/parking/' + input);
+    this.parking = input;
+    this.applyFilters();
   }
 
   onCityChange(input: string) {
-    this.fetchHomesWithImages('/city/' + input);
+    this.city = input;
+    this.applyFilters();
   }
 
-  fetchHomesWithImages(url: string) {
-    this.service.getHomeSell(url).pipe(
-      mergeMap((homes: HomeSell[]) => {
-        this.homes = homes;
-        return this.fetchImagesForHomes();
-      })
-    ).subscribe();
+  applyFilters() {
+    this.filteredHomes = this.homes
+      .filter(home => !this.selectedBhk || home.bhk === this.selectedBhk) // Filter by BHK if selected
+      .filter(home => !this.furnishing || home.furnished === this.furnishing) // Filter by furnishing if selected
+      .filter(home => !this.parking || home.parking === this.parking) // Filter by parking if selected
+      .filter(home => !this.city || home.city === this.city); // Filter by city if selected
+    this.fetchImagesForHomes(); // Fetch images for the filtered homes
   }
 
   async saveLikeAds(ad: saveLikedAds) {

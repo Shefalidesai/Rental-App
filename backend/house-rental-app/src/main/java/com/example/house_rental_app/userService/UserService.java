@@ -8,6 +8,7 @@ import com.example.house_rental_app.entities.User;
 import com.example.house_rental_app.exceptions.AppException;
 import com.example.house_rental_app.mappers.UserMapper;
 import com.example.house_rental_app.repository.UserRepo;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,6 +26,7 @@ public class UserService {
 
     private final UserMapper userMapper;
 
+    @Transactional
     public UserDTO login(CredentialsDto credentialsDto) {
         User user = userRepository.findByLogin(credentialsDto.login())
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
@@ -49,6 +51,8 @@ public class UserService {
 
         return userMapper.toUserDto(savedUser);
     }
+
+    @Transactional
     public UserDTO findByLogin(String login) {
         User user = userRepository.findByLogin(login)
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
